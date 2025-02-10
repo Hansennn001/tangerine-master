@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Meditative - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Tangerine</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -26,7 +26,7 @@
     <div class="container">
         <div class="row m-auto">
             <div class="col-12 w-100 text-center">
-                <a class="navbar-brand w-100" href="{{ url('index.html') }}">Meditative</a>
+                <a class="navbar-brand w-100" href="{{ url('app.blade.html') }}">Tangerine</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
@@ -34,13 +34,13 @@
             <div class="col-12 w-100 text-center">
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav m-auto">
-                        <li class="nav-item active"><a href="{{ url('index.html') }}" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="{{ url('about.html') }}" class="nav-link">About</a></li>
-                        <li class="nav-item"><a href="{{ url('trainer.html') }}" class="nav-link">Trainer</a></li>
-                        <li class="nav-item"><a href="{{ url('classes.html') }}" class="nav-link">Classes</a></li>
-                        <li class="nav-item"><a href="{{ url('schedule.html') }}" class="nav-link">Schedule</a></li>
-                        <li class="nav-item"><a href="{{ url('blog.html') }}" class="nav-link">Blog</a></li>
-                        <li class="nav-item"><a href="{{ url('contact.html') }}" class="nav-link">Contact</a></li>
+                        <li class="nav-item active"><a href="{{ url('app.blade.php') }}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="{{ url('about.blade.php') }}" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="{{ url('trainer.blade.php') }}" class="nav-link">Trainer</a></li>
+                        <li class="nav-item"><a href="{{ url('classes.blade.php') }}" class="nav-link">Classes</a></li>
+                        <li class="nav-item"><a href="{{ url('schedule.blade.php') }}" class="nav-link">Schedule</a></li>
+                        <li class="nav-item"><a href="{{ url('blog.blade.php') }}" class="nav-link">Blog</a></li>
+                        <li class="nav-item"><a href="{{ url('contact.blade.php') }}" class="nav-link">Contact</a></li>
                     </ul>
                 </div>
             </div>
