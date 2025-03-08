@@ -45,28 +45,11 @@
                                 {{ $detail->name }}
                             </td>
                             <td class="px-6 py-4">
-                                @if ($detail->drop_in_price)
-                                    {{ format_rupiah($detail->drop_in_price) }}
+                                @if ($detail->price)
+                                    {{ format_rupiah($detail->price) }}
                                 @else
                                     -
                                 @endif
-                            </td>
-                            <td class="px-6 py-4">
-                                @if ($detail['10_session_price'])
-                                    {{ format_rupiah($detail['10_session_price']) }}
-                                @else
-                                    -
-                                @endif
-                            </td>
-                            <td class="px-6 py-4">
-                                @if ($detail['20_session_price'])
-                                    {{ format_rupiah($detail['20_session_price']) }}
-                                @else
-                                    -
-                                @endif
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $detail->person_max ?? '-' }}
                             </td>
 
                             <td class="px-6 py-4">

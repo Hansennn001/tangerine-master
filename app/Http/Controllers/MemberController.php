@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
-use App\Models\CourseDetail;
+use App\Models\Service;
+use App\Models\ServiceDetail;
 use App\Models\Member;
 use App\Models\MemberPlan;
 use Illuminate\Http\Request;
@@ -31,20 +31,20 @@ class MemberController extends Controller
     public function checkout(Request $request)
     {
         $user_id = Auth::user()->id;
-        $course_id = $request->course_id;
-        $course_detail_id = explode("#", $request->plan)[0];
-        $course_detail_name = CourseDetail::find($course_detail_id)->name;
-        $course_detail_type = explode("#", $request->plan)[1];
-        $course_label_taken = Course::find($course_id)->name . " - " . $course_detail_name . " - " .  Str::replace("Price", "", Str::headline(str_replace('_', ' ', $course_detail_type)));
-        $total = CourseDetail::find($course_detail_id)[$course_detail_type];
+        $service_id = $request->service_id;
+        $service_detail_id = explode("#", $request->plan)[0];
+        $service_detail_name = ServiceDetail::find($service_detail_id)->name;
+        $service_detail_type = explode("#", $request->plan)[1];
+        $service_label_taken = Service::find($service_id)->name . " - " . $service_detail_name . " - " .  Str::replace("Price", "", Str::headline(str_replace('_', ' ', $service_detail_type)));
+        $total = ServiceDetail::find($service_detail_id)[$service_detail_type];
         session()->put("checkout_{$user_id}", [
             'user_id' => Auth::user()->id,
             'trainer_id' => $request->trainer,
-            "course_id" => $course_id,
-            "course_detail_id" => $course_detail_id,
-            "course_detail_name" => $course_detail_name,
-            "course_detail_type" => $course_detail_type,
-            "course_label_taken" => $course_label_taken,
+            "service_id" => $service_id,
+            "service_detail_id" => $service_detail_id,
+            "service_detail_name" => $service_detail_name,
+            "service_detail_type" => $service_detail_type,
+            "service_label_taken" => $service_label_taken,
             "total" => $total,
         ]);
 

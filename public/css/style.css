@@ -3,3 +3,49 @@
 @import url("select-2.css");
 @import url("ckeditor.css");
 @import url("scrollbar.css");
+
+/* Styling pagination (titik-titik) */
+.swiper-pagination {
+    bottom: 5px !important; /* Posisi lebih dekat */
+}
+
+.swiper-pagination-bullet {
+    width: 8px !important; /* Ukuran lebih kecil */
+    height: 8px !important;
+    margin: 0 4px !important; /* Jarak antar titik lebih rapat */
+}
+
+/* Styling panah navigasi */
+.swiper-button-prev, .swiper-button-next {
+    font-size: 20px !important; /* Ukuran lebih kecil */
+    color: #333 !important; /* Warna lebih netral */
+    width: 35px !important; /* Lebar panah */
+    height: 35px !important;
+}
+
+/* Posisi panah navigasi lebih dekat */
+.swiper-button-prev {
+    left: -5px !important;
+}
+
+.swiper-butt
+/* Mengecilkan ukuran titik-titik pagination */
+.swiper-pagination-bullet {
+    width: 6px !important;
+    height: 6px !important;
+    margin: 0 3px !important;
+    background: #666 !important; /* Warna lebih soft */
+}
+
+/* Mengecilkan ukuran panah */
+.swiper-button-prev, .swiper-button-next {
+    font-size: 18px !important;
+    width: 30px !important;
+    height: 30px !important;
+    color: #333 !important; /* Warna lebih gelap agar lebih jelas */
+}
+
+/* Memperpendek jarak pagination */
+.swiper-pagination {
+    bottom: 10px !important; /* Sesuaikan agar lebih dekat */
+}

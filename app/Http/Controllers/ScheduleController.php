@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
-use App\Models\CourseDetail;
+use App\Models\Service;
+use App\Models\ServiceDetail;
 use App\Models\Member;
 use App\Models\Room;
 use App\Models\Schedule;
@@ -64,7 +64,7 @@ class ScheduleController extends Controller
     {
         return view("backend.schedule.create", [
             "title" => "Add Schedule",
-            "courses" => Course::all(),
+            "services" => Service::all(),
         ]);
     }
 
@@ -73,17 +73,17 @@ class ScheduleController extends Controller
         DB::beginTransaction();
         try {
             $plan = $request->plan;
-            $course_name = trim(explode(" - ", $plan)[0]);
-            $course_detail_name = trim(explode(" - ", $plan)[1]);
-            $course_detail = CourseDetail::where('name', $course_detail_name)->whereHas("course", function ($query) use ($course_name) {
-                $query->where('name', $course_name);
+            $service_name = trim(explode(" - ", $plan)[0]);
+            $service_detail_name = trim(explode(" - ", $plan)[1]);
+            $service_detail = ServiceDetail::where('name', $service_detail_name)->whereHas("service", function ($query) use ($service_name) {
+                $query->where('name', $service_name);
             })->first();
 
             $newSchedule = [
                 'member_id' => $request->member_id,
                 'room_id' => $request->room_id,
-                'course_detail_id' => $course_detail->id,
-                'course_id' => $course_detail->course_id,
+                'service_detail_id' => $service_detail->id,
+                'service_id' => $service_detail->service_id,
                 'trainer_id' => $request->trainer_id,
                 'date' => $request->date,
                 'time' => $request->time,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use App\Models\ServiceDetail;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -15,7 +16,7 @@ class ServiceController extends Controller
     {
         return view("backend.service.index", [
             "title" => "Service",
-            "services" => Service::all(),
+            "services" => Service::with("category")->get(),
         ]);    
     }
 
@@ -23,6 +24,7 @@ class ServiceController extends Controller
     {
         return view("backend.service.create", [
             "title" => "Add Service",
+            "categories" => Category::all(),
         ]);        
     }
 
@@ -38,6 +40,7 @@ class ServiceController extends Controller
                 "slug" => Str::slug($request->name),
                 "description" => $request->description,
                 "image" => $fileName,
+                "category_id" => $request->category_id,
             ]);            
             DB::commit();
             return redirect_user("success", "Successfully Added Class", "admin.service.index");
@@ -53,6 +56,7 @@ class ServiceController extends Controller
         return view("backend.service.edit", [
             "title" => "Edit Service {$service->name}",
             "service" => $service,
+            "categories" => Category::all()
         ]);        
     }
 
@@ -65,6 +69,7 @@ class ServiceController extends Controller
                 "name" => $request->name,
                 "slug" => Str::slug($request->name),
                 "description" => $request->description,
+                "category_id" => $request->category_id,
             ];
             if ($request->hasFile("image")) {
                 $file = $request->file("image");

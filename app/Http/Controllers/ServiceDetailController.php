@@ -30,9 +30,7 @@ class ServiceDetailController extends Controller
             "name" => $request->name,
             "service_id" => $request->service_id,
             "drop_in_price" => $request->drop_in_price,
-            "10_session_price" => $request->input("10_session_price"),
-            "20_session_price" => $request->input("20_session_price"),
-            "person_max" => $request->person_max,
+            "price" => $request->price,
         ]);
         return redirect_user("success", "Successfully Added Service Detail", "admin.service-detail.index");
     }

@@ -8,7 +8,7 @@
                 </button>
                 <div class="flex-shrink-0 flex items-center gap-2 ps-2">
                     <a href="/" class="flex items-center">
-                        <img class="h-7 w-auto drop-shadow-md" src="{{ asset('imgs/logo.png') }}" alt="Logo" />
+                        <img class="h-7 w-auto drop-shadow-md" src="{{ asset('imgs/logo2.png') }}" alt="Logo" />
                     </a>
                     <span class="text-lg poppins-medium">
                         Tangerine

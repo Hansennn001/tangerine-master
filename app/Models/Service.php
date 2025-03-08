@@ -7,11 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-    protected $guarded = ['id'];
-    protected $with = "serviceDetails";
+    protected $fillable = ['name', 'slug', 'description', 'image', 'category_id'];
+    protected $with = ["serviceDetails", "category"];
 
     public function serviceDetails()
     {
         return $this->hasMany(ServiceDetail::class);
     }
+
+    public function category()
+    {
+    return $this->belongsTo(Category::class);
+    }
+
 }

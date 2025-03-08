@@ -23,12 +23,16 @@
                     required />
             </div>
             <div class="mb-5">
-                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 ">
-                    Service Description
+                <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900">
+                    Select Category
                 </label>
-                <textarea id="description" rows="4" name="description"
-                    class="resize-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-stone-500 focus:border-stone-500"
-                    placeholder=""></textarea>
+                <select id="category_id" name="category_id"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-stone-500 focus:border-stone-500 block w-full p-2.5" required>
+                    <option value="" disabled selected>Choose a category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="">
                 <label for="image" class="block mb-2 text-sm font-medium text-gray-900 ">
