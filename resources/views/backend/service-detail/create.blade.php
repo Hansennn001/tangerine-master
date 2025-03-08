@@ -5,24 +5,24 @@
         @include('partials.breadcrumb', [
             'current' => $title,
             'before' => [
-                'name' => 'Class Detail',
-                'url' => route('admin.course-detail.index'),
+                'name' => 'Service Detail',
+                'url' => route('admin.service-detail.index'),
             ],
         ])
     </div>
 
-    <form action="{{ route('admin.course-detail.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.service-detail.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="bg-white w-1/2 rounded-md shadow-md p-5 mt-5">
             <div class="mb-5">
-                <label for="course_id" class="block mb-2 text-sm font-medium text-gray-900 ">
-                    Select Class
+                <label for="service_id" class="block mb-2 text-sm font-medium text-gray-900 ">
+                    Select Service
                 </label>
-                <select id="course_id" name="course_id"
+                <select id="service_id" name="service_id"
                     class="select-2-dropdown bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>-- Choose --</option>
-                    @foreach ($courses as $course)
-                        <option value="{{ $course->id }}">{{ $course->name }}</option>
+                    @foreach ($services as $service)
+                        <option value="{{ $service->id }}">{{ $service->name }}</option>
                     @endforeach
                 </select>
             </div>

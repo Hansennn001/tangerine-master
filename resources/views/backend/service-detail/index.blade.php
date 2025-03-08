@@ -5,9 +5,9 @@
         @include('partials.breadcrumb', [
             'current' => $title,
         ])
-        <a href="{{ route('admin.course.create') }}"
+        <a href="{{ route('admin.service-detail.create') }}"
             class="text-white bg-stone-600 border border-stone-600 hover:bg-stone-700 focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-sm px-5 py-2.5">
-            <i class="fas fa-plus mr-1.5"></i> Add Class
+            <i class="fas fa-plus mr-1.5"></i> Add Detail Service
         </a>
     </div>
 
@@ -20,42 +20,62 @@
                             No
                         </th>
                         <th scope="col" class="px-6 py-4">
-                            Name
-                        </th>
-                        <th scope="col" class="px-6 py-4 w-[500px]">
-                            Description
+                            Service Name
                         </th>
                         <th scope="col" class="px-6 py-4">
-                            Image
+                            Detail Name
                         </th>
+                        <th scope="col" class="px-6 py-4">
+                            Price
                         <th scope="col" class="px-6 py-4">
                             Action
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($courses as $course)
+                    @foreach ($service_details as $detail)
                         <tr class="bg-white border-b border-gray-200">
                             <td class="px-6 py-4">
                                 {{ $loop->iteration }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $course->name }}
+                                {{ $detail->service->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $course->description }}
+                                {{ $detail->name }}
                             </td>
                             <td class="px-6 py-4">
-                                <img src="/uploads/courses/{{ $course->image }}"
-                                    class="size-20 object-cover rounded-md shadow-md">
+                                @if ($detail->drop_in_price)
+                                    {{ format_rupiah($detail->drop_in_price) }}
+                                @else
+                                    -
+                                @endif
                             </td>
+                            <td class="px-6 py-4">
+                                @if ($detail['10_session_price'])
+                                    {{ format_rupiah($detail['10_session_price']) }}
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td class="px-6 py-4">
+                                @if ($detail['20_session_price'])
+                                    {{ format_rupiah($detail['20_session_price']) }}
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $detail->person_max ?? '-' }}
+                            </td>
+
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-5">
-                                    <a href="{{ route('admin.course.edit', $course->id) }}"
+                                    <a href="{{ route('admin.service-detail.edit', $detail->id) }}"
                                         class="text-sm text-blue-700 poppins-medium hover:underline">
                                         <i class="fa-regular fa-pen-to-square"></i> Edit
                                     </a>
-                                    <a href="javascript:void(0)" data-category-id="{{ $course->id }}"
+                                    <a href="javascript:void(0)" data-service-id="{{ $detail->id }}"
                                         class="btn-delete text-sm text-red-700 poppins-medium hover:underline">
                                         <i class="fa-regular fa-trash"></i> Delete
                                     </a>
@@ -71,10 +91,10 @@
 
 @section('script')
     <script>
-        $(".btn-delete").click(deleteCourse);
+        $(".btn-delete").click(deleteService);
 
-        function deleteCourse() {
-            const categoryID = $(this).data("category-id");
+        function deleteService() {
+            const serviceID = $(this).data("service-id");
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -87,7 +107,8 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: `{{ route('admin.course.destroy', ':id') }}`.replace(':id', categoryID),
+                        url: `{{ route('admin.service-detail.destroy', ':id') }}`.replace(':id',
+                            serviceID),
                         type: 'DELETE',
                         data: {
                             _token: "{{ csrf_token() }}",

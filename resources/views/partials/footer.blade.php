@@ -1,5 +1,5 @@
 <footer
-    class="px-4 sm:px-6 lg:px-12 py-16 {{ request()->routeIs('classes') || request()->routeIs('member.checkout') || request()->routeIs('payment.waiting') ? 'bg-stone-100' : 'bg-white' }}">
+    class="px-4 sm:px-6 lg:px-12 py-16 {{ request()->routeIs('services') || request()->routeIs('member.checkout') || request()->routeIs('payment.waiting') ? 'bg-stone-100' : 'bg-white' }}">
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 lg:gap-4 w-[90%] mx-auto">
         <div class="flex flex-col text-stone-700 h-fit">
             <h1 class="poppins-medium text-base">Tangerine</h1>
@@ -51,7 +51,7 @@
                     class="text-stone-600 text-sm hover:font-medium hover:translate-x-1 duration-100">About
                 </a>
                 <a href=""
-                    class="text-stone-600 text-sm hover:font-medium hover:translate-x-1 duration-100">Classes
+                    class="text-stone-600 text-sm hover:font-medium hover:translate-x-1 duration-100">Services
                 </a>
                 <a href=""
                     class="text-stone-600 text-sm hover:font-medium hover:translate-x-1 duration-100">Schedule

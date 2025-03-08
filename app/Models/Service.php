@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Course extends Model
+class Service extends Model
 {
     protected $guarded = ['id'];
-    protected $with = "courseDetails";
+    protected $with = "serviceDetails";
 
-
-    public function courseDetails()
+    public function serviceDetails()
     {
-        return $this->hasMany(CourseDetail::class);
+        return $this->hasMany(ServiceDetail::class);
     }
 }

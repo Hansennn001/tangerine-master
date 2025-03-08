@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('course_details', function (Blueprint $table) {
+        Schema::create('service_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("course_id");
+            $table->foreignId("service_id")->constrained()->onDelete("cascade");
             $table->string("name");
-            $table->double("drop_in_price")->nullable();
-            $table->double("10_session_price")->nullable();
-            $table->double("20_session_price")->nullable();
-            $table->double("person_max")->nullable();
+            $table->double("price")->nullable(); // Menambahkan kolom price
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('course_details');
+        Schema::dropIfExists('service_details');
     }
 };

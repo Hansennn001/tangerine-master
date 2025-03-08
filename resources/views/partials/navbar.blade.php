@@ -3,7 +3,7 @@
         <div class="flex justify-between h-[70px]">
             <div class="flex items-center">
                 <a href="#" class="flex items-center">
-                    <img src="/imgs/logo.png" class="h-8 w-auto mr-2" alt="Tangerine Logo" />
+                    <img src="/imgs/logo2.png" class="h-8 w-auto mr-2" alt="Tangerine Logo" />
                     <span class="text-xl font-bold text-stone-700">Tangerine</span>
                 </a>
             </div>
@@ -13,11 +13,11 @@
                 <a href="{{ route('about') }}"
                     class="{{ request()->routeIs('about') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">About</a>
                 <a href="{{ route('trainer') }}"
-                    class="{{ request()->routeIs('trainer') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Trainer</a>
-                <a href="{{ route('classes') }}"
-                    class="{{ request()->routeIs('classes') || request()->routeIs('class.detail') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Classes</a>
+                    class="{{ request()->routeIs('trainer') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Beauticians</a>
+                <a href="{{ route('services') }}"
+                    class="{{ request()->routeIs('service') || request()->routeIs('class.detail') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Services</a>
                 <a href="{{ route('schedule') }}"
-                    class="{{ request()->routeIs('schedule') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Schedule</a>
+                    class="{{ request()->routeIs('schedule') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Product</a>
                 @auth
                     <button id="dropdownAvatarNameButton"Mobile data-dropdown-toggle="dropdownAvatarName"
                         class="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full hover:text-stone-600 dark:hover:text-stone-500 md:me-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 "
@@ -129,8 +129,8 @@
                 class="block px-3 py-2 text-base {{ request()->routeIs('about') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">About</a>
             <a href="{{ route('trainer') }}"
                 class="block px-3 py-2 text-base {{ request()->routeIs('trainer') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">Trainer</a>
-            <a href="{{ route('classes') }}"
-                class="block px-3 py-2 text-base {{ request()->routeIs('classes') || request()->routeIs('class.detail') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">Classes</a>
+            <a href="{{ route('services') }}"
+                class="block px-3 py-2 text-base {{ request()->routeIs('services') || request()->routeIs('class.detail') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">Services</a>
             <a href="{{ route('schedule') }}"
                 class="block px-3 py-2 text-base {{ request()->routeIs('schedule') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">Schedule</a>
         </div>

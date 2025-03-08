@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Course;
-use App\Models\CourseDetail;
+use App\Models\Service;
+use App\Models\ServiceDetail;
 use App\Models\Menu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -81,10 +81,10 @@ if (!function_exists("format_date")) {
 }
 
 if (!function_exists("getPlanLabel")) {
-    function getPlanLabel($course_id, $course_detail_id)
+    function getPlanLabel($service_id, $service_detail_id)
     {
-        $course = Course::find($course_id);
-        $course_detail = CourseDetail::find($course_detail_id);
-        return $course->name . " - " . $course_detail->name;
+        $service = Service::find($service_id);
+        $service_detail = ServiceDetail::find($service_detail_id);
+        return $service->name . " - " . $service_detail->name;
     }
 }

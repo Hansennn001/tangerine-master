@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\CourseDetailController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServiceDetailController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberPlanController;
 use App\Http\Controllers\RoomController;
@@ -35,22 +35,22 @@ Route::middleware(AdminMiddleware::class)->group(function () {
             Route::delete("/destroy/{id}", [TrainerController::class, "destroy"])->name("admin.trainer.destroy");
         });
 
-        Route::prefix("course")->group(function () {
-            Route::get("/", [CourseController::class, "index"])->name("admin.course.index");
-            Route::get("/create", [CourseController::class, "create"])->name("admin.course.create");
-            Route::post("/store", [CourseController::class, "store"])->name("admin.course.store");
-            Route::get("/edit/{id}", [CourseController::class, "edit"])->name("admin.course.edit");
-            Route::put("/update/{id}", [CourseController::class, "update"])->name("admin.course.update");
-            Route::delete("/destroy/{id}", [CourseController::class, "destroy"])->name("admin.course.destroy");
+        Route::prefix("service")->group(function () {
+            Route::get("/", [ServiceController::class, "index"])->name("admin.service.index");
+            Route::get("/create", [ServiceController::class, "create"])->name("admin.service.create");
+            Route::post("/store", [ServiceController::class, "store"])->name("admin.service.store");
+            Route::get("/edit/{id}", [ServiceController::class, "edit"])->name("admin.service.edit");
+            Route::put("/update/{id}", [ServiceController::class, "update"])->name("admin.service.update");
+            Route::delete("/destroy/{id}", [ServiceController::class, "destroy"])->name("admin.service.destroy");
         });
 
-        Route::prefix("course-detail")->group(function () {
-            Route::get("/", [CourseDetailController::class, "index"])->name("admin.course-detail.index");
-            Route::get("/create", [CourseDetailController::class, "create"])->name("admin.course-detail.create");
-            Route::post("/store", [CourseDetailController::class, "store"])->name("admin.course-detail.store");
-            Route::get("/edit/{id}", [CourseDetailController::class, "edit"])->name("admin.course-detail.edit");
-            Route::put("/update/{id}", [CourseDetailController::class, "update"])->name("admin.course-detail.update");
-            Route::delete("/destroy/{id}", [CourseDetailController::class, "destroy"])->name("admin.course-detail.destroy");
+        Route::prefix("service-detail")->group(function () {
+            Route::get("/", [ServiceDetailController::class, "index"])->name("admin.service-detail.index");
+            Route::get("/create", [ServiceDetailController::class, "create"])->name("admin.service-detail.create");
+            Route::post("/store", [ServiceDetailController::class, "store"])->name("admin.service-detail.store");
+            Route::get("/edit/{id}", [ServiceDetailController::class, "edit"])->name("admin.service-detail.edit");
+            Route::put("/update/{id}", [ServiceDetailController::class, "update"])->name("admin.service-detail.update");
+            Route::delete("/destroy/{id}", [ServiceDetailController::class, "destroy"])->name("admin.service-detail.destroy");
         });
 
         Route::prefix("room")->group(function () {

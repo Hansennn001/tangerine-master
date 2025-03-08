@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
+use App\Models\Service;
+use App\Models\ServiceDetail;
 use App\Models\Room;
 use App\Models\Trainer;
 use App\Models\Transaction;
@@ -12,12 +13,13 @@ use Illuminate\Support\Facades\Auth;
 class FrontendController extends Controller
 {
     public function home()
-    {
-        return view('frontend.welcome', [
-            "title" => "Home",
-            "courses" => Course::all(),
-        ]);
-    }
+{
+    return view('frontend.welcome', [
+        "title" => "Home",
+        "services" => Service::all(),
+    ]);
+}
+
 
     public function about()
     {
@@ -34,23 +36,25 @@ class FrontendController extends Controller
         ]);
     }
 
-    public function classes()
-    {
-        return view('frontend.classes', [
-            "title" => "classes",
-            "courses" => Course::all(),
-        ]);
-    }
+    public function services()
+{
+    return view('frontend.services', [ 
+        "title" => "Services",
+        "services" => Service::all(), 
+    ]);
+}
 
-    public function class_detail($slug)
-    {
-        $course = Course::firstWhere("slug", $slug);
-        return view('frontend.class-detail', [
-            "title" => "classes",
-            "course" => $course,
-            "trainers" => Trainer::all(),
-        ]);
-    }
+
+public function service_detail($slug)
+{
+    $service = Service::firstWhere("slug", $slug);
+    return view('frontend.service-detail', [ 
+        "title" => "Services",
+        "service" => $service, 
+        "trainers" => Trainer::all(),
+    ]);
+}
+
 
     public function checkout()
     {
@@ -77,6 +81,7 @@ class FrontendController extends Controller
     {
         return view('frontend.schedule', [
             "title" => "schedule",
+            "trainers" => Trainer::all(),
         ]);
     }
 }

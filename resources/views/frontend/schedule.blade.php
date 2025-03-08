@@ -3,211 +3,43 @@
 @section('content')
     {{-- Hero --}}
     <div class="h-[550px] relative">
-        <img src="/imgs/bg_3.jpg" class="w-full h-full object-cover">
+        <img src="/imgs/jumbotron.jpg" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-stone-800/50 bg-opacity-60"></div>
-        <div class="absolute ps-5 top-0 left-0 text-white flex flex-col justify-center items-center w-full h-full">
-            <h2 class="text-4xl lg:text-5xl poppins-bold">Class Schedule</h2>
-            <p class="text-lg text-white mt-2">Home Schedule</p>
+        <div class="absolute ps-5 top-0 left-0 text-white flex flex-col justify-center lg:items-center w-full h-full">
+            <h2 class="text-4xl lg:text-5xl poppins-bold">Embrace Your Radiance</h2>
+            <p class="text-lg text-white w-[90%] lg:w-auto">Enhancing your natural beauty in a way that aligns with your values.</p>
         </div>
     </div>
     {{-- EndHero --}}
 
-    {{-- Schedule --}}
     <div class="px-4 sm:px-6 lg:px-8 py-28 bg-stone-100">
         <div class="w-[90%] mx-auto">
-            <h1 class="text-4xl text-stone-700 text-center poppins-semibold" data-aos="fade-down" data-aos-duration="1000">
-                Class Time Table
+            {{-- Products --}}
+            <h1 class="text-4xl text-stone-700 text-center poppins-semibold">
+                Products
             </h1>
-            <div class="overflow-x-auto overflow-y-hidden scrollbar">
-                <div class="mt-16 w-[1000px] lg:w-auto" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="grid grid-cols-7">
-                        <div class="p-5 text-center bg-stone-600 text-white border border-l-2 border-gray-300">Monday</div>
-                        <div class="p-5 text-center bg-stone-600 text-white border border-gray-300">Tuesday</div>
-                        <div class="p-5 text-center bg-stone-600 text-white border border-gray-300">Wednesday</div>
-                        <div class="p-5 text-center bg-stone-600 text-white border border-gray-300">Thursday</div>
-                        <div class="p-5 text-center bg-stone-600 text-white border border-gray-300">Friday</div>
-                        <div class="p-5 text-center bg-stone-600 text-white border border-gray-300">Saturday</div>
-                        <div class="p-5 text-center bg-stone-600 text-white border border-r-2 border-gray-300">Sunday</div>
-                    </div>
-                    <div class="grid grid-cols-7">
-                        <div class="h-[200px] border border-l-2 border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-1.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-2.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-1.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-[200px] border border-r-2 border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-7">
-                        <div class="h-[200px] border border-l-2 border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-4.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-5.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-6.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                        <div class="h-[200px] border border-r-2 border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-7.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
+            <div class="mt-20 grid grid-cols-1 lg:grid-cols-4 gap-12">
+                @foreach ($trainers as $trainer)
+                    <div class="bg-white rounded-md shadow-md overflow-hidden" data-aos="fade-up" data-aos-duration="1000"
+                        data-aos-delay="100">
+                        <img src="/uploads/trainers/{{ $trainer->image }}" class="w-full h-[350px] object-cover">
+                        <div class="mt-5 flex flex-col px-5">
+                            <span class="text-xs text-stone-800 poppins-medium uppercase">Product</span>
+                            <h1 class="text-lg mt-2 text-stone-700 poppins-semibold">{{ $trainer->name }}</h1>
+                            <p class="text-sm text-stone-600">
+                                {{ $trainer->description }}
+                            </p>
+                            <div class="mt-4 grid grid-cols-4 pb-5">
+                                <a href="{{ $trainer->facebook_link }}" target="_blank"
+                                    class="bg-stone-700 text-white flex justify-center items-center w-12 h-12 rounded-full">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </a>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-7">
-                        <div class="h-[200px] border border-l-2 border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-1.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-2.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-1.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-[200px] border border-r-2 border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-7">
-                        <div class="h-[200px] border border-l-2 border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-4.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-5.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-6.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-[200px] border border-gray-300 flex items-center justify-center">
-                            <i class="fa-regular fa-times text-stone-700"></i>
-                        </div>
-                        <div class="h-[200px] border border-r-2 border-gray-300 flex items-center justify-center">
-                            <div class="flex flex-col items-center">
-                                <img src="/imgs/classes-7.jpg" class="rounded-full size-20 object-cover shadow-md">
-                                <div class="mt-2 text-center">
-                                    <h1 class="text-base text-stone-700 poppins-medium">Yoga Training</h1>
-                                    <p class="mt-0.5 text-xs text-stone-600">01:00 PM - 03:00 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
-        </div>
     </div>
-    {{-- End Schedule --}}
+    {{-- End Rooms --}}
 @endsection

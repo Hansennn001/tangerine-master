@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CourseDetail extends Model
+class ServiceDetail extends Model
 {
     protected $guarded = ['id'];
-
-    public function course()
+    public function service()
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Service::class);
     }
 }

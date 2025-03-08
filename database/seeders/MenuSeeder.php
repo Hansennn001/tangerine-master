@@ -50,13 +50,13 @@ class MenuSeeder extends Seeder
         MenuDetail::create([
             "menu_id" => $newMenu->id,
             "name" => "class",
-            "route" => "admin.course.index",
+            "route" => "admin.service.index",
             "icon" => "fa-regular fa-dumbbell",
         ]);
         MenuDetail::create([
             "menu_id" => $newMenu->id,
             "name" => "class detail",
-            "route" => "admin.course-detail.index",
+            "route" => "admin.service-detail.index",
             "icon" => "fa-regular fa-dumbbell",
         ]);
         MenuDetail::create([

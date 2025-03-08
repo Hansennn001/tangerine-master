@@ -2,28 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
-use App\Models\CourseDetail;
+use App\Models\Service;
+use App\Models\ServiceDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class CourseController extends Controller
+class ServiceController extends Controller
 {
     public function index()
     {
-        return view("backend.course.index", [
-            "title" => "Class",
-            "courses" => Course::all(),
-        ]);
+        return view("backend.service.index", [
+            "title" => "Service",
+            "services" => Service::all(),
+        ]);    
     }
 
     public function create()
     {
-        return view("backend.course.create", [
-            "title" => "Add Class",
-        ]);
+        return view("backend.service.create", [
+            "title" => "Add Service",
+        ]);        
     }
 
     public function store(Request $request)
@@ -31,40 +31,35 @@ class CourseController extends Controller
         DB::beginTransaction();
         try {
             $file = $request->file("image");
-            $fileName = "COURSE_IMAGE_" . date("Ymdhis") . "." . $file->extension();
-            $file->move(public_path("uploads/courses"), $fileName);
-            Course::create([
+            $fileName = "SERIVCE_IMAGE_" . date("Ymdhis") . "." . $file->extension();
+            $file->move(public_path("uploads/services"), $fileName);
+            Service::create([
                 "name" => $request->name,
                 "slug" => Str::slug($request->name),
                 "description" => $request->description,
                 "image" => $fileName,
-            ]);
+            ]);            
             DB::commit();
-            return redirect_user("success", "Successfully Added Class", "admin.course.index");
+            return redirect_user("success", "Successfully Added Class", "admin.service.index");
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect_user("error", $e->getMessage());
         }
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
-        $course = Course::find($id);
-        return view("backend.course.edit", [
-            "title" => "Edit Class {$course->name}",
-            "course" => $course,
-        ]);
+        $service = Service::find($id);
+        return view("backend.service.edit", [
+            "title" => "Edit Service {$service->name}",
+            "service" => $service,
+        ]);        
     }
 
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
-        $course = Course::find($id);
+        $service = Service::find($id);
         try {
             $updatedData = [
                 "name" => $request->name,
@@ -73,27 +68,27 @@ class CourseController extends Controller
             ];
             if ($request->hasFile("image")) {
                 $file = $request->file("image");
-                $fileName = "COURSE_IMAGE_" . date("Ymdhis") . "." . $file->extension();
-                $file->move(public_path("uploads/courses"), $fileName);
-                if (File::exists(public_path("uploads/courses/{$course->image}"))) {
-                    unlink(public_path("uploads/courses/{$course->image}"));
+                $fileName = "SERVICE_IMAGE_" . date("Ymdhis") . "." . $file->extension();
+                $file->move(public_path("uploads/services"), $fileName);
+                if (File::exists(public_path("uploads/services/{$service->image}"))) {
+                    unlink(public_path("uploads/services/{$service->image}"));
                 }
                 $updatedData["image"] = $fileName;
             }
-            $course->update($updatedData);
+            $service->update($updatedData);
             DB::commit();
-            return redirect_user("success", "Successfully Added Class", "admin.course.index");
+            return redirect_user("success", "Successfully Updated Service", "admin.service.index");
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect_user("error", $e->getMessage());
         }
-    }
+    }    
 
     public function destroy($id)
     {
-        $course = Course::find($id);
-        $course->courseDetails()->delete();
-        $course->delete();
+        $service = Service::find($id);
+        $service->serviceDetails()->delete();
+        $service->delete();
 
         notificationFlash("success", "Successfully Delete Class");
         return response()->json([

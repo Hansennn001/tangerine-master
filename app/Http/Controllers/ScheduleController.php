@@ -50,12 +50,13 @@ class ScheduleController extends Controller
             }
         }
 
-        return view("backend.schedule.index", [
+        return view("frontend.schedule", [
             "title" => "Schedule",
             "schedules" => Schedule::all(),
             "years" => $years,
             "months" => $months,
             "calendarData" => $calendarData,
+            "trainers" => Trainer::all(),
         ]);
     }
 
