@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\ServiceDetail;
 use App\Models\Room;
-use App\Models\Trainer;
+use App\Models\Beautician;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,11 +28,11 @@ class FrontendController extends Controller
         ]);
     }
 
-    public function trainer()
+    public function beautician()
     {
-        return view('frontend.trainer', [
-            "title" => "Trainer",
-            "trainers" => Trainer::all(),
+        return view('frontend.beautician', [
+            "title" => "Beautician",
+            "beauticians" => Beautician::all(),
         ]);
     }
 
@@ -51,7 +51,7 @@ public function service_detail($slug)
     return view('frontend.service-detail', [ 
         "title" => "Services",
         "service" => $service, 
-        "trainers" => Trainer::all(),
+        "Beauticians" => Service::all(),
     ]);
 }
 
@@ -65,7 +65,7 @@ public function service_detail($slug)
             "title" => "Checkout",
             "data" => $data,
             "rooms" => Room::all(),
-            "trainers" => Trainer::all(),
+            "Beauticians" => Beautician::all(),
         ]);
     }
 
@@ -81,7 +81,7 @@ public function service_detail($slug)
     {
         return view('frontend.schedule', [
             "title" => "schedule",
-            "trainers" => Trainer::all(),
+            "Beauticians" => Beautician::all(),
         ]);
     }
 }
