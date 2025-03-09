@@ -37,7 +37,7 @@ class TransactionController extends Controller
                 "invoice" => "INV_TANGERINE_" . date("Ymdhis") . $user_id . "_" . strtoupper(Str::random(10)),
                 "user_id" => $dataCheckout["user_id"],
                 "room_id" => $request->room_id,
-                "trainer_id" => $request->trainer_id,
+                "beautician_id" => $request->beautician_id,
                 "plan" => $dataCheckout["course_label_taken"],
                 "day" => $request->day,
                 "time" => $request->time,
@@ -93,7 +93,7 @@ class TransactionController extends Controller
 
             MemberPlan::create([
                 "member_id" => $newMember->id,
-                "trainer_id" => $transaction->trainer_id,
+                "beautician_id" => $transaction->beautician_id,
                 "room_id" => $transaction->room_id,
                 "plan" => $transaction->plan,
                 "day" => $transaction->day,

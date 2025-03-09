@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Trainer;
+use App\Models\Beautician;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use phpseclib3\Math\BinaryField;
 
-class TrainerController extends Controller
+class BeauticianController extends Controller
 {
     public function index()
     {
-        return view('backend.trainer.index', [
-            "title" => "Trainer",
-            "trainers" => Trainer::all(),
+        return view('backend.beautician.index', [
+            "title" => "Beautician",
+            "beauticians" => Beautician::all(),
         ]);
     }
 
     public function create()
     {
-        return view('backend.trainer.create', [
-            "title" => "Add Trainer",
+        return view('backend.beautician.create', [
+            "title" => "Add Beautician",
         ]);
     }
 
@@ -31,9 +31,9 @@ class TrainerController extends Controller
         DB::beginTransaction();
         try {
             $file = $request->file("image");
-            $fileName = "TRAINER_IMAGE_" . date("Ymdhis") . "." . $file->extension();
-            $file->move(public_path("uploads/trainers"), $fileName);
-            Trainer::create([
+            $fileName = "BEAUTICIAN_IMAGE_" . date("Ymdhis") . "." . $file->extension();
+            $file->move(public_path("uploads/beauticians"), $fileName);
+            Beautician::create([
                 "name" => $request->name,
                 "description" => $request->description,
                 "image" => $fileName,
@@ -42,7 +42,7 @@ class TrainerController extends Controller
                 "twitter_link" => $request->twitter_link,
             ]);
             DB::commit();
-            return redirect_user("success", "Successfully Add Trainer", "admin.trainer.index");
+            return redirect_user("success", "Successfully Add Beautician", "admin.Beautician.index");
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect_user("error", $e->getMessage());
@@ -56,17 +56,17 @@ class TrainerController extends Controller
 
     public function edit($id)
     {
-        $trainer = Trainer::find($id);
-        return view('backend.trainer.edit', [
-            "title" => "Edit Trainer {$trainer->name}",
-            "trainer" => $trainer,
+        $beautician = Beautician::find($id);
+        return view('backend.beautician.edit', [
+            "title" => "Edit Beautician {$beautician->name}",
+            "beautician" => $beautician,
         ]);
     }
 
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
-        $trainer = Trainer::find($id);
+        $beautician = Beautician::find($id);
         $updatedData = [
             "name" => $request->name,
             "description" => $request->description,
@@ -76,17 +76,17 @@ class TrainerController extends Controller
         ];
         if ($request->hasFile("image")) {
             $file = $request->file("image");
-            $fileName = "TRAINER_IMAGE_" . date("Ymdhis") . "." . $file->extension();
-            $file->move(public_path("uploads/trainers"), $fileName);
-            if (File::exists(public_path("uploads/trainers/{$trainer->image}"))) {
-                unlink(public_path("uploads/trainers/{$trainer->image}"));
+            $fileName = "BEAUTICIAN_IMAGE_" . date("Ymdhis") . "." . $file->extension();
+            $file->move(public_path("uploads/beauticians"), $fileName);
+            if (File::exists(public_path("uploads/beauticians/{$beautician->image}"))) {
+                unlink(public_path("uploads/beauticians/{$beautician->image}"));
             }
             $updatedData["image"] = $fileName;
         }
         try {
-            $trainer->update($updatedData);
+            $beautician->update($updatedData);
             DB::commit();
-            return redirect_user("success", "Successfully Edit Trainer", "admin.trainer.index");
+            return redirect_user("success", "Successfully Edit Beautician", "admin.beautician.index");
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect_user("error", $e->getMessage());
@@ -96,10 +96,10 @@ class TrainerController extends Controller
     public function destroy($id)
     {
         try {
-            $trainer = Trainer::find($id);
-            $trainer->delete();
+            $beautician = beautician::find($id);
+            $beautician->delete();
 
-            notificationFlash("success", "Successfully Deleted Trainer");
+            notificationFlash("success", "Successfully Deleted Beautician");
             return response()->json([
                 "success" => true,
             ]);

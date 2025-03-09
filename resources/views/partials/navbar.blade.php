@@ -12,8 +12,8 @@
                     class="{{ request()->routeIs('home') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Home</a>
                 <a href="{{ route('about') }}"
                     class="{{ request()->routeIs('about') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">About</a>
-                <a href="{{ route('trainer') }}"
-                    class="{{ request()->routeIs('trainer') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Beauticians</a>
+                <a href="{{ route('beautician') }}"
+                    class="{{ request()->routeIs('beautician') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Beauticians</a>
                 <a href="{{ route('services') }}"
                     class="{{ request()->routeIs('service') || request()->routeIs('class.detail') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Services</a>
                 <a href="{{ route('schedule') }}"
@@ -127,8 +127,8 @@
                 class="block px-3 py-2 text-base {{ request()->routeIs('home') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }} ">Beranda</a>
             <a href="{{ route('about') }}"
                 class="block px-3 py-2 text-base {{ request()->routeIs('about') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">About</a>
-            <a href="{{ route('trainer') }}"
-                class="block px-3 py-2 text-base {{ request()->routeIs('trainer') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">Trainer</a>
+            <a href="{{ route('beautician') }}"
+                class="block px-3 py-2 text-base {{ request()->routeIs('beautician') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">beautician</a>
             <a href="{{ route('services') }}"
                 class="block px-3 py-2 text-base {{ request()->routeIs('services') || request()->routeIs('class.detail') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">Services</a>
             <a href="{{ route('schedule') }}"

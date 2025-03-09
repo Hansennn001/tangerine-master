@@ -19,7 +19,7 @@ class MemberSeeder extends Seeder
         ]);
         MemberPlan::create([
             "member_id" => 1,
-            "trainer_id" => 1,
+            "beautician_id" => 1,
             "room_id" => 1,
             "plan" => "Pilates Class Senior - Private Class - 10 Session",
             "day" => "Sunday",

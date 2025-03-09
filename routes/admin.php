@@ -8,7 +8,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberPlanController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ScheduleController;
-use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\BeauticianController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -26,13 +26,13 @@ Route::middleware(AdminMiddleware::class)->group(function () {
             Route::get("/{id}", [MemberPlanController::class, "show"])->name("admin.member-plan.show");
         });
 
-        Route::prefix("trainer")->group(function () {
-            Route::get("/", [TrainerController::class, "index"])->name("admin.trainer.index");
-            Route::get("/create", [TrainerController::class, "create"])->name("admin.trainer.create");
-            Route::post("/store", [TrainerController::class, "store"])->name("admin.trainer.store");
-            Route::get("/edit/{id}", [TrainerController::class, "edit"])->name("admin.trainer.edit");
-            Route::put("/update/{id}", [TrainerController::class, "update"])->name("admin.trainer.update");
-            Route::delete("/destroy/{id}", [TrainerController::class, "destroy"])->name("admin.trainer.destroy");
+        Route::prefix("beautician")->group(function () {
+            Route::get("/", [BeauticianController::class, "index"])->name("admin.beautician.index");
+            Route::get("/create", [BeauticianController::class, "create"])->name("admin.beautician.create");
+            Route::post("/store", [BeauticianController::class, "store"])->name("admin.beautician.store");
+            Route::get("/edit/{id}", [BeauticianController::class, "edit"])->name("admin.beautician.edit");
+            Route::put("/update/{id}", [BeauticianController::class, "update"])->name("admin.beautician.update");
+            Route::delete("/destroy/{id}", [BeauticianController::class, "destroy"])->name("admin.beautician.destroy");
         });
 
         Route::prefix("service")->group(function () {

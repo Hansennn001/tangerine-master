@@ -44,19 +44,19 @@
                 </div>
                 @if ($data['course_detail_name'] == 'Private Class')
                     <div class="mt-10">
-                        <h1 class="text-center text-xl text-stone-700 poppins-semibold">Choose your trainer</h1>
+                        <h1 class="text-center text-xl text-stone-700 poppins-semibold">Choose your beautician</h1>
                         <ul class="grid w-full gap-10 md:grid-cols-2 mt-5">
-                            @foreach ($trainers as $index => $trainer)
+                            @foreach ($beauticians as $index => $beautician)
                                 <li>
-                                    <input type="radio" id="trainer-{{ $index }}" name="trainer_id"
-                                        value="{{ $trainer->id }}" class="hidden peer" />
-                                    <label for="trainer-{{ $index }}"
+                                    <input type="radio" id="beautician-{{ $index }}" name="beautician_id"
+                                        value="{{ $beautician->id }}" class="hidden peer" />
+                                    <label for="beautician-{{ $index }}"
                                         class="inline-flex flex-col items-center justify-between w-full text-gray-500 bg-white border border-gray-200 rounded-lg overflow-hidden cursor-pointer peer-checked:border-2 peer-checked:border-stone-600 peer-checked:text-stone-600 hover:text-gray-600 hover:bg-gray-100">
-                                        <img src="/uploads/trainers/{{ $trainer->image }}"
+                                        <img src="/uploads/beauticians/{{ $beautician->image }}"
                                             class="h-[300px] w-full object-cover">
                                         <div class="p-3">
-                                            <h1 class="text-center text-stone-700 poppins-medium">{{ $trainer->name }}</h1>
-                                            <h1 class="text-center text-sm mt-1">{{ $trainer->description }}</h1>
+                                            <h1 class="text-center text-stone-700 poppins-medium">{{ $beautician->name }}</h1>
+                                            <h1 class="text-center text-sm mt-1">{{ $beautician->description }}</h1>
                                         </div>
                                     </label>
                                 </li>
@@ -139,12 +139,12 @@
                     text: "Please select the room"
                 });
                 return;
-            } else if ($("input[name=trainer_id]").length != 0) {
-                if ($("input[name=trainer_id]:checked").length == 0) {
+            } else if ($("input[name=beautician_id]").length != 0) {
+                if ($("input[name=beautician_id]:checked").length == 0) {
                     Swal.fire({
                         icon: "error",
                         title: "Error",
-                        text: "Please select the trainer"
+                        text: "Please select the beautician"
                     });
                     return;
                 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('member_plans', function (Blueprint $table) {
             $table->id();
             $table->foreignId("member_id");
-            $table->foreignId("trainer_id")->nullable();
+            $table->foreignId("beautician_id")->nullable();
             $table->foreignId("room_id")->nullable();
             $table->string("plan");
             $table->string("day");

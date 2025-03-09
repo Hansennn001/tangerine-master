@@ -19,18 +19,18 @@
                 Products
             </h1>
             <div class="mt-20 grid grid-cols-1 lg:grid-cols-4 gap-12">
-                @foreach ($trainers as $trainer)
+                @foreach ($beauticians as $beautician)
                     <div class="bg-white rounded-md shadow-md overflow-hidden" data-aos="fade-up" data-aos-duration="1000"
                         data-aos-delay="100">
-                        <img src="/uploads/trainers/{{ $trainer->image }}" class="w-full h-[350px] object-cover">
+                        <img src="/uploads/beauticians/{{ $beautician->image }}" class="w-full h-[350px] object-cover">
                         <div class="mt-5 flex flex-col px-5">
                             <span class="text-xs text-stone-800 poppins-medium uppercase">Product</span>
-                            <h1 class="text-lg mt-2 text-stone-700 poppins-semibold">{{ $trainer->name }}</h1>
+                            <h1 class="text-lg mt-2 text-stone-700 poppins-semibold">{{ $beautician->name }}</h1>
                             <p class="text-sm text-stone-600">
-                                {{ $trainer->description }}
+                                {{ $beautician->description }}
                             </p>
                             <div class="mt-4 grid grid-cols-4 pb-5">
-                                <a href="{{ $trainer->facebook_link }}" target="_blank"
+                                <a href="{{ $beautician->facebook_link }}" target="_blank"
                                     class="bg-stone-700 text-white flex justify-center items-center w-12 h-12 rounded-full">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </a>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId("room_id");
             $table->foreignId("course_id");
             $table->foreignId("course_detail_id");
-            $table->foreignId("trainer_id")->nullable();
+            $table->foreignId("beautician_id")->nullable();
             $table->date("date");
             $table->time("time");
             $table->timestamps();

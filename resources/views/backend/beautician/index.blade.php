@@ -5,9 +5,9 @@
         @include('partials.breadcrumb', [
             'current' => $title,
         ])
-        <a href="{{ route('admin.trainer.create') }}"
+        <a href="{{ route('admin.beautician.create') }}"
             class="text-white bg-stone-600 border border-stone-600 hover:bg-stone-700 focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-sm px-5 py-2.5">
-            <i class="fas fa-plus mr-1.5"></i> Add Trainer
+            <i class="fas fa-plus mr-1.5"></i> Add Beautician
         </a>
     </div>
 
@@ -37,29 +37,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($trainers as $trainer)
+                    @foreach ($beauticians as $beautician)
                         <tr class="bg-white border-b border-gray-200">
                             <td class="px-6 py-4">
                                 {{ $loop->iteration }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $trainer->name }}
+                                {{ $beautician->name }}
                             </td>
                             <td class="px-6 py-4 w-fit">
-                                {{ $trainer->description }}
+                                {{ $beautician->description }}
                             </td>
                             <td class="px-6 py-4">
-                                <img src="/uploads/trainers/{{ $trainer->image }}"
+                                <img src="/uploads/Beauticians/{{ $beautician->image }}"
                                     class="size-20 object-cover rounded-md shadow-md">
                             </td>
                             <td class="px-6 py-4">
                                 <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
                                     <li>
                                         Facebook :
-                                        @if ($trainer->facebook_link)
-                                            <a href="{{ $trainer->facebook_link }}"
+                                        @if ($beautician->facebook_link)
+                                            <a href="{{ $beautician->facebook_link }}"
                                                 class="text-stone-700 hover:underline poppins-medium" target="_blank">
-                                                {{ $trainer->facebook_link }}
+                                                {{ $beautician->facebook_link }}
                                             </a>
                                         @else
                                             -
@@ -67,10 +67,10 @@
                                     </li>
                                     <li>
                                         Instagram :
-                                        @if ($trainer->instagram_link)
-                                            <a href="{{ $trainer->instagram_link }}"
+                                        @if ($beautician->instagram_link)
+                                            <a href="{{ $beautician->instagram_link }}"
                                                 class="text-stone-700 hover:underline poppins-medium" target="_blank">
-                                                {{ $trainer->instagram_link }}
+                                                {{ $beautician->instagram_link }}
                                             </a>
                                         @else
                                             -
@@ -78,10 +78,10 @@
                                     </li>
                                     <li>
                                         Twitter :
-                                        @if ($trainer->twitter_link)
-                                            <a href="{{ $trainer->twitter_link }}"
+                                        @if ($beautician->twitter_link)
+                                            <a href="{{ $beautician->twitter_link }}"
                                                 class="text-stone-700 hover:underline poppins-medium" target="_blank">
-                                                {{ $trainer->twitter_link }}
+                                                {{ $beautician->twitter_link }}
                                             </a>
                                         @else
                                             -
@@ -91,11 +91,11 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-5">
-                                    <a href="{{ route('admin.trainer.edit', $trainer->id) }}"
+                                    <a href="{{ route('admin.beautician.edit', $beautician->id) }}"
                                         class="text-sm text-blue-700 poppins-medium hover:underline">
                                         <i class="fa-regular fa-pen-to-square"></i> Edit
                                     </a>
-                                    <a href="javascript:void(0)" data-trainer-id="{{ $trainer->id }}"
+                                    <a href="javascript:void(0)" data-beautician-id="{{ $beautician->id }}"
                                         class="btn-delete text-sm text-red-700 poppins-medium hover:underline">
                                         <i class="fa-regular fa-trash"></i> Delete
                                     </a>
@@ -111,10 +111,10 @@
 
 @section('script')
     <script>
-        $(".btn-delete").click(deleteTrainer);
+        $(".btn-delete").click(deletebeautician);
 
-        function deleteTrainer() {
-            const trainerID = $(this).data("trainer-id");
+        function deleteBeautician() {
+            const beauticianID = $(this).data("beautician-id");
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -127,7 +127,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: `{{ route('admin.trainer.destroy', ':id') }}`.replace(':id', trainerID),
+                        url: `{{ route('admin.beautician.destroy', ':id') }}`.replace(':id', beauticianID),
                         type: 'DELETE',
                         data: {
                             _token: "{{ csrf_token() }}",

@@ -8,9 +8,9 @@ class Schedule extends Model
 {
     protected $guarded = ['id'];
 
-    public function trainer()
+    public function beautician()
     {
-        return $this->belongsTo(Trainer::class);
+        return $this->belongsTo(Beautician::class);
     }
 
     public function room()

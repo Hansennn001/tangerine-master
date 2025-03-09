@@ -38,8 +38,8 @@ class MenuSeeder extends Seeder
         ]);
         MenuDetail::create([
             "menu_id" => $newMenu->id,
-            "name" => "trainer",
-            "route" => "admin.trainer.index",
+            "name" => "beautician",
+            "route" => "admin.beautician.index",
             "icon" => "fa-regular fa-people-robbery",
         ]);
 

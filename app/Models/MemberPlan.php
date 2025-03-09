@@ -14,9 +14,9 @@ class MemberPlan extends Model
     }
 
 
-    public function trainer()
+    public function beautician()
     {
-        return $this->belongsTo(Trainer::class);
+        return $this->belongsTo(Beautician::class);
     }
 
 

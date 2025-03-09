@@ -7,7 +7,7 @@ use App\Models\ServiceDetail;
 use App\Models\Member;
 use App\Models\Room;
 use App\Models\Schedule;
-use App\Models\Trainer;
+use App\Models\Beautician;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -56,7 +56,7 @@ class ScheduleController extends Controller
             "years" => $years,
             "months" => $months,
             "calendarData" => $calendarData,
-            "trainers" => Trainer::all(),
+            "beauticians" => Beautician::all(),
         ]);
     }
 
@@ -84,7 +84,7 @@ class ScheduleController extends Controller
                 'room_id' => $request->room_id,
                 'service_detail_id' => $service_detail->id,
                 'service_id' => $service_detail->service_id,
-                'trainer_id' => $request->trainer_id,
+                'beautician_id' => $request->beautician_id,
                 'date' => $request->date,
                 'time' => $request->time,
             ];
@@ -116,7 +116,7 @@ class ScheduleController extends Controller
             "selectedDate" => $selectedDate,
             "hours" => $hours,
             "rooms" => Room::all(),
-            "trainers" => Trainer::all(),
+            "beauticians" => Beautician::all(),
             "members" => Member::all(),
             "schedules" => $schedules,
         ]);

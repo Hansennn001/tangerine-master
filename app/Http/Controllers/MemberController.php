@@ -39,7 +39,7 @@ class MemberController extends Controller
         $total = ServiceDetail::find($service_detail_id)[$service_detail_type];
         session()->put("checkout_{$user_id}", [
             'user_id' => Auth::user()->id,
-            'trainer_id' => $request->trainer,
+            'beautician_id' => $request->beautician,
             "service_id" => $service_id,
             "service_detail_id" => $service_detail_id,
             "service_detail_name" => $service_detail_name,

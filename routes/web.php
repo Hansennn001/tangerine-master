@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, "home"])->name("home");
 Route::get('/about', [FrontendController::class, "about"])->name("about");
-Route::get('/trainer', [FrontendController::class, "trainer"])->name("trainer");
+Route::get('/beautician', [FrontendController::class, "beautician"])->name("beautician");
 Route::prefix("services")->group(function () {
     Route::get('/', [FrontendController::class, "services"])->name("services");
     Route::get('/{slug}', [FrontendController::class, "service_detail"])->name("service.detail");});

@@ -19,8 +19,8 @@ class Transaction extends Model
         return $this->belongsTo(Room::class);
     }
 
-    public function trainer()
+    public function beautician()
     {
-        return $this->belongsTo(Trainer::class);
+        return $this->belongsTo(Beautician::class);
     }
 }

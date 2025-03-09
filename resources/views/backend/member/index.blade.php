@@ -22,7 +22,7 @@
                             Plan
                         </th>
                         <th scope="col" class="px-6 py-4">
-                            Trainer
+                            Beautician
                         </th>
                         <th scope="col" class="px-6 py-4">
                             Room
@@ -51,7 +51,7 @@
                                 {{ $member_plan->plan }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $member_plan->trainer ? $member_plan->trainer->name : '-' }}
+                                {{ $member_plan->beautician ? $member_plan->beautician->name : '-' }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $member_plan->room ? $member_plan->room->name : '-' }}

@@ -65,10 +65,10 @@
             </div>
             <div class="flex justify-between">
                 <span class="lg:text-sm text-xs flex-[3]">
-                    Trainer Name
+                    Beautician Name
                 </span>
                 <span class="lg:text-sm text-xs flex-[2] text-gray-600 text-end">
-                    {{ $transaction->trainer ? $transaction->trainer->name : '-' }}
+                    {{ $transaction->beautician ? $transaction->beautician->name : '-' }}
                 </span>
             </div>
             <div class="flex justify-between">

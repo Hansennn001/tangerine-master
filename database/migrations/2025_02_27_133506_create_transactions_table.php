@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("invoice");
             $table->foreignId("user_id");
-            $table->foreignId("trainer_id")->nullable();
+            $table->foreignId("beautician_id")->nullable();
             $table->foreignId("room_id")->nullable();
             $table->string("plan");
             $table->string("day");
