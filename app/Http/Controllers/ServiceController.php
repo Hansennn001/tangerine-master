@@ -38,7 +38,6 @@ class ServiceController extends Controller
             Service::create([
                 "name" => $request->name,
                 "slug" => Str::slug($request->name),
-                "description" => $request->description,
                 "image" => $fileName,
                 "category_id" => $request->category_id,
             ]);            
@@ -68,7 +67,6 @@ class ServiceController extends Controller
             $updatedData = [
                 "name" => $request->name,
                 "slug" => Str::slug($request->name),
-                "description" => $request->description,
                 "category_id" => $request->category_id,
             ];
             if ($request->hasFile("image")) {
@@ -96,8 +94,6 @@ class ServiceController extends Controller
         $service->delete();
 
         notificationFlash("success", "Successfully Delete Class");
-        return response()->json([
-            "success" => true,
-        ]);
+        return redirect_user("success", "Successfully Deleted Class", "admin.service.index");
     }
 }

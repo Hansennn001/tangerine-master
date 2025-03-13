@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("service_id")->constrained()->onDelete("cascade");
             $table->string("name");
-            $table->double("price")->nullable(); // Menambahkan kolom price
+            $table->double("price")->nullable();
             $table->timestamps();
         });
     }

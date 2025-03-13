@@ -23,7 +23,7 @@
                             Name
                         </th>
                         <th scope="col" class="px-6 py-4 w-[500px]">
-                            Description
+                            Category
                         </th>
                         <th scope="col" class="px-6 py-4">
                             Image
@@ -43,7 +43,7 @@
                                 {{ $service->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $service->description }}
+                                {{ $service->category->name }}
                             </td>
                             <td class="px-6 py-4">
                                 <img src="/uploads/services/{{ $service->image }}"
@@ -55,10 +55,13 @@
                                         class="text-sm text-blue-700 poppins-medium hover:underline">
                                         <i class="fa-regular fa-pen-to-square"></i> Edit
                                     </a>
-                                    <a href="javascript:void(0)" data-service-id="{{ $service->id }}"
-                                        class="btn-delete text-sm text-red-700 poppins-medium hover:underline">
-                                        <i class="fa-regular fa-trash"></i> Delete
-                                    </a>
+                                    <form action="{{ route('admin.service.destroy', $service->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-sm text-red-700 poppins-medium hover:underline">
+                                            <i class="fa-regular fa-trash"></i> Delete
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -67,46 +70,4 @@
             </table>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script>
-        $(".btn-delete").click(deleteService);
-
-        function deleteService() {
-            const serviceID = $(this).data("service-id");
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: `{{ route('admin.service.destroy', ':id') }}`.replace(':id', serviceID),
-                        type: 'DELETE',
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                        },
-                        beforeSend: function() {
-                            Swal.fire({
-                                title: 'Deleting...',
-                                text: 'Please wait...',
-                                didOpen: () => {
-                                    Swal.showLoading()
-                                }
-                            });
-                        },
-                        success: function(data) {
-                            location.reload();
-                        },
-                    });
-                }
-            });
-        }
-    </script>
 @endsection

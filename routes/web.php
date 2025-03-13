@@ -12,7 +12,9 @@ Route::get('/beautician', [FrontendController::class, "beautician"])->name("beau
 Route::prefix("services")->group(function () {
     Route::get('/', [FrontendController::class, "services"])->name("services");
     Route::get('/{slug}', [FrontendController::class, "service_detail"])->name("service.detail");});
-Route::get('/schedule', [FrontendController::class, "schedule"])->name("schedule");
+Route::get('/product', [FrontendController::class, "product"])->name("product");
+Route::get('/checkout', [FrontendController::class, "checkout"])->name("checkout");
+
 
 Route::middleware(["auth"])->group(function () {
     Route::middleware(["verified"])->group(function () {});

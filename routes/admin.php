@@ -7,7 +7,7 @@ use App\Http\Controllers\ServiceDetailController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberPlanController;
 use App\Http\Controllers\RoomController;
-use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BeauticianController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\AdminMiddleware;
@@ -62,14 +62,14 @@ Route::middleware(AdminMiddleware::class)->group(function () {
             Route::delete("/destroy/{id}", [RoomController::class, "destroy"])->name("admin.room.destroy");
         });
 
-        Route::prefix("schedule")->group(function () {
-            Route::get("/", [ScheduleController::class, "index"])->name("admin.schedule.index");
-            Route::get("/create", [ScheduleController::class, "create"])->name("admin.schedule.create");
-            Route::post("/store", [ScheduleController::class, "store"])->name("admin.schedule.store");
-            Route::get("/{date}/show", [ScheduleController::class, "show"])->name("admin.schedule.show");
-            Route::get("/edit/{id}", [ScheduleController::class, "edit"])->name("admin.schedule.edit");
-            Route::put("/update/{id}", [ScheduleController::class, "update"])->name("admin.schedule.update");
-            Route::delete("/destroy/{id}", [ScheduleController::class, "destroy"])->name("admin.schedule.destroy");
+        Route::prefix("product")->group(function () {
+            Route::get("/", [ProductController::class, "index"])->name("admin.product.index");
+            Route::get("/create", [ProductController::class, "create"])->name("admin.product.create");
+            Route::post("/store", [ProductController::class, "store"])->name("admin.product.store");
+            Route::get("/{date}/show", [ProductController::class, "show"])->name("admin.product.show");
+            Route::get("/edit/{id}", [ProductController::class, "edit"])->name("admin.product.edit");
+            Route::put("/update/{id}", [ProductController::class, "update"])->name("admin.product.update");
+            Route::delete("/destroy/{id}", [ProductController::class, "destroy"])->name("admin.product.destroy");
         });
 
         Route::prefix("transaction")->group(function () {

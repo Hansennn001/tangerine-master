@@ -67,8 +67,8 @@ class MenuSeeder extends Seeder
         ]);
         MenuDetail::create([
             "menu_id" => $newMenu->id,
-            "name" => "schedule",
-            "route" => "admin.schedule.index",
+            "name" => "product",
+            "route" => "admin.product.index",
             "icon" => "fa-regular fa-calendar-days",
         ]);
 

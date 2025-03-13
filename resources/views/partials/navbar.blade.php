@@ -16,8 +16,8 @@
                     class="{{ request()->routeIs('beautician') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Beauticians</a>
                 <a href="{{ route('services') }}"
                     class="{{ request()->routeIs('service') || request()->routeIs('class.detail') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Services</a>
-                <a href="{{ route('schedule') }}"
-                    class="{{ request()->routeIs('schedule') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Product</a>
+                <a href="{{ route('product') }}"
+                    class="{{ request()->routeIs('product') ? 'text-stone-900 hover:text-stone-900 poppins-semibold' : 'text-stone-700 hover:text-stone-900 font-medium' }}">Product</a>
                 @auth
                     <button id="dropdownAvatarNameButton"Mobile data-dropdown-toggle="dropdownAvatarName"
                         class="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full hover:text-stone-600 dark:hover:text-stone-500 md:me-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 "
@@ -131,8 +131,8 @@
                 class="block px-3 py-2 text-base {{ request()->routeIs('beautician') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">beautician</a>
             <a href="{{ route('services') }}"
                 class="block px-3 py-2 text-base {{ request()->routeIs('services') || request()->routeIs('class.detail') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">Services</a>
-            <a href="{{ route('schedule') }}"
-                class="block px-3 py-2 text-base {{ request()->routeIs('schedule') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">Schedule</a>
+            <a href="{{ route('product') }}"
+                class="block px-3 py-2 text-base {{ request()->routeIs('product') ? 'poppins-medium text-stone-900 bg-stone-100 poppins-semibold' : 'poppins-medium text-stone-700 hover:text-stone-900 hover:bg-gray-50' }}">Product</a>
         </div>
     </div>
 </nav>

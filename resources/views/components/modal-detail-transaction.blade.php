@@ -73,7 +73,7 @@
             </div>
             <div class="flex justify-between">
                 <span class="lg:text-sm text-xs flex-[3]">
-                    Schedule Routine
+                    Product Routine
                 </span>
                 <span class="lg:text-sm text-xs flex-[2] text-gray-600 text-end">
                     {{ $transaction->day }} - {{ $transaction->time }}

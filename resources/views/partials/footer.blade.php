@@ -54,7 +54,7 @@
                     class="text-stone-600 text-sm hover:font-medium hover:translate-x-1 duration-100">Services
                 </a>
                 <a href=""
-                    class="text-stone-600 text-sm hover:font-medium hover:translate-x-1 duration-100">Schedule
+                    class="text-stone-600 text-sm hover:font-medium hover:translate-x-1 duration-100">Product
                 </a>
             </div>
         </div>

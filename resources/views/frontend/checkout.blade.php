@@ -18,15 +18,15 @@
                         this is the last page to become a member, make sure everything is correct
                     </div>
                 </div>
-                <div class="mt-10">
+                {{-- <div class="mt-10">
                     <h1 class="text-center text-2xl text-stone-700 poppins-semibold">{{ $data['course_label_taken'] }}</h1>
                     <p class="text-center text-xl mt-1 poppins-medium text-stone-600">{{ format_rupiah($data['total']) }}
                     </p>
-                </div>
+                </div> --}}
                 <div class="mt-10">
                     <h1 class="text-center text-xl text-stone-700 poppins-semibold">Choose your room</h1>
                     <ul class="grid w-full gap-10 md:grid-cols-2 mt-5">
-                        @foreach ($rooms as $index => $room)
+                        {{-- @foreach ($rooms as $index => $room)
                             <li>
                                 <input type="radio" id="hosting-small-{{ $index }}" name="room_id"
                                     value="{{ $room->id }}" class="hidden peer" />
@@ -39,13 +39,13 @@
                                     </div>
                                 </label>
                             </li>
-                        @endforeach
+                        @endforeach --}}
                     </ul>
                 </div>
-                @if ($data['course_detail_name'] == 'Private Class')
+                {{-- @if ($data['course_detail_name'] == 'Private Class') --}}
                     <div class="mt-10">
                         <h1 class="text-center text-xl text-stone-700 poppins-semibold">Choose your beautician</h1>
-                        <ul class="grid w-full gap-10 md:grid-cols-2 mt-5">
+                        {{-- <ul class="grid w-full gap-10 md:grid-cols-2 mt-5">
                             @foreach ($beauticians as $index => $beautician)
                                 <li>
                                     <input type="radio" id="beautician-{{ $index }}" name="beautician_id"
@@ -61,13 +61,13 @@
                                     </label>
                                 </li>
                             @endforeach
-                        </ul>
+                        </ul> --}}
                     </div>
-                @endif
+                {{-- @endif --}}
                 <div class="mt-10">
-                    <h1 class="text-center text-xl text-stone-700 poppins-semibold">Choose a routine schedule</h1>
+                    <h1 class="text-center text-xl text-stone-700 poppins-semibold">Choose a routine product</h1>
                     <div class="grid grid-cols-2 gap-5 mt-10">
-                        <div class="">
+                        {{-- <div class="">
                             <label for="day"
                                 class="text-center block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Day
@@ -83,7 +83,16 @@
                                 <option value="Friday">Friday</option>
                                 <option value="Saturday">Saturday</option>
                             </select>
+                        </div> --}}
+
+                        <div class="">
+                            <label for="date" class="text-center block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Select Date
+                            </label>
+                            <input type="date" id="date" name="date"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-stone-500 focus:border-stone-500 block w-full p-2.5">
                         </div>
+                        
                         <div class="">
                             <label for="time"
                                 class="text-center block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -129,57 +138,57 @@
         function checkout(e) {
             e.preventDefault();
             const data = $(this).serialize();
-            let daySelected = $("select[name=day]").val();
-            let timeSelected = $("select[name=time]").val();
+            // let daySelected = $("select[name=day]").val();
+            // let timeSelected = $("select[name=time]").val();
 
-            if ($("input[name=room_id]:checked").length == 0) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: "Please select the room"
-                });
-                return;
-            } else if ($("input[name=beautician_id]").length != 0) {
-                if ($("input[name=beautician_id]:checked").length == 0) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "Please select the beautician"
-                    });
-                    return;
-                }
-            } else if (!daySelected) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: "Please select day"
-                });
-                return;
-            } else if (!timeSelected) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: "Please select time"
-                });
-                return;
-            }
+            // if ($("input[name=room_id]:checked").length == 0) {
+            //     Swal.fire({
+            //         icon: "error",
+            //         title: "Error",
+            //         text: "Please select the room"
+            //     });
+            //     return;
+            // } else if ($("input[name=beautician_id]").length != 0) {
+            //     if ($("input[name=beautician_id]:checked").length == 0) {
+            //         Swal.fire({
+            //             icon: "error",
+            //             title: "Error",
+            //             text: "Please select the beautician"
+            //         });
+            //         return;
+            //     }
+            // } else if (!daySelected) {
+            //     Swal.fire({
+            //         icon: "error",
+            //         title: "Error",
+            //         text: "Please select day"
+            //     });
+            //     return;
+            // } else if (!timeSelected) {
+            //     Swal.fire({
+            //         icon: "error",
+            //         title: "Error",
+            //         text: "Please select time"
+            //     });
+            //     return;
+            // }
 
-            const isLogin = @json(Auth::check());
-            if (!isLogin) {
-                Swal.fire({
-                    icon: "warning",
-                    title: 'Login Required',
-                    text: 'You must login first before become a membership',
-                    confirmButtonText: 'Login',
-                    showCancelButton: true,
-                    cancelButtonText: 'Cancel'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "/login";
-                    }
-                });
-                return;
-            }
+            // const isLogin = @json(Auth::check());
+            // if (!isLogin) {
+            //     Swal.fire({
+            //         icon: "warning",
+            //         title: 'Login Required',
+            //         text: 'You must login first before become a membership',
+            //         confirmButtonText: 'Login',
+            //         showCancelButton: true,
+            //         cancelButtonText: 'Cancel'
+            //     }).then((result) => {
+            //         if (result.isConfirmed) {
+            //             window.location.href = "/login";
+            //         }
+            //     });
+            //     return;
+            // }
 
             $.ajax({
                 type: "POST",

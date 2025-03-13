@@ -7,6 +7,7 @@ use App\Models\ServiceDetail;
 use App\Models\Room;
 use App\Models\Beautician;
 use App\Models\Transaction;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,14 +59,8 @@ public function service_detail($slug)
 
     public function checkout()
     {
-        $user_id = Auth::user()->id;
-        $data = session("checkout_{$user_id}");
-
         return view("frontend.checkout", [
             "title" => "Checkout",
-            "data" => $data,
-            "rooms" => Room::all(),
-            "Beauticians" => Beautician::all(),
         ]);
     }
 
@@ -77,11 +72,11 @@ public function service_detail($slug)
         ]);
     }
 
-    public function schedule()
+    public function product()
     {
-        return view('frontend.schedule', [
-            "title" => "schedule",
-            "Beauticians" => Beautician::all(),
+        return view('frontend.product', [
+            "title" => "product",
+            "products" => Product::all(),
         ]);
     }
 }

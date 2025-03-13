@@ -28,7 +28,7 @@
                             Room
                         </th>
                         <th scope="col" class="px-6 py-4">
-                            Routine Schedule
+                            Routine Product
                         </th>
                         <th scope="col" class="px-6 py-4">
                             Validity Period

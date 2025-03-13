@@ -37,12 +37,9 @@ class BeauticianController extends Controller
                 "name" => $request->name,
                 "description" => $request->description,
                 "image" => $fileName,
-                "facebook_link" => $request->facebook_link,
-                "instagram_link" => $request->instagram_link,
-                "twitter_link" => $request->twitter_link,
             ]);
             DB::commit();
-            return redirect_user("success", "Successfully Add Beautician", "admin.Beautician.index");
+            return redirect_user("success", "Successfully Add Beautician", "admin.beautician.index");
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect_user("error", $e->getMessage());
@@ -70,9 +67,6 @@ class BeauticianController extends Controller
         $updatedData = [
             "name" => $request->name,
             "description" => $request->description,
-            "facebook_link" => $request->facebook_link,
-            "instagram_link" => $request->instagram_link,
-            "twitter_link" => $request->twitter_link,
         ];
         if ($request->hasFile("image")) {
             $file = $request->file("image");
@@ -100,14 +94,10 @@ class BeauticianController extends Controller
             $beautician->delete();
 
             notificationFlash("success", "Successfully Deleted Beautician");
-            return response()->json([
-                "success" => true,
-            ]);
+            return redirect_user("success", "Successfully Deleted Beautician", "admin.beautician.index");
         } catch (\Exception $e) {
-            notificationFlash("success", $e->getMessage());
-            return response()->json([
-                "success" => false,
-            ]);
+            notificationFlash("failed", $e->getMessage());
+            return redirect_user("error", $e->getMessage());
         }
     }
 }

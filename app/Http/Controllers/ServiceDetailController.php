@@ -10,34 +10,35 @@ class ServiceDetailController extends Controller
 {
 
     public function index()
-    {
-        $categories = \App\Models\Category::with([
-            'services.serviceDetails' => function ($query) {
-                $query->select('id', 'name', 'service_id', 'price',);
-            }
-        ])->get();
-    
-        return view("backend.service-detail.index", [
-            "title" => "Service Detail by Category",
-            "categories" => $categories,
-        ]);
-    }
+{
+    $categories = \App\Models\Category::with([
+        'services' => function ($query) {
+            $query->select('id', 'category_id', 'name', 'price'); 
+        }
+    ])->get();
+
+    return view("backend.service-detail.index", [
+        "title" => "Service Detail by Category",
+        "categories" => $categories,
+    ]);
+}
+
     
 
     public function create()
-    {
-        return view("backend.service-detail.create", [
-            "title" => "Add Service Detail",
-            "services" => Service::all(),
-        ]);
-    }
+{
+    return view("backend.service-detail.create", [
+        "title" => "Add Service Detail",
+        "services" => Service::select('id', 'name', 'price')->get(),
+    ]);
+}
+
 
     public function store(Request $request)
     {
         ServiceDetail::create([
             "name" => $request->name,
             "service_id" => $request->service_id,
-            "price" => $request->price,
         ]);
         return redirect_user("success", "Successfully Added Service Detail", "admin.service-detail.index");
     }
@@ -48,14 +49,17 @@ class ServiceDetailController extends Controller
     }
 
     public function edit($id)
-    {
-        $serviceDetail = ServiceDetail::find($id);
-        return view("backend.service-detail.edit", [
-            "title" => "Edit Service Detail",
-            "services" => Service::all(),
-            "service_detail" => $serviceDetail,
-        ]);
-    }
+{
+    $serviceDetail = ServiceDetail::findOrFail($id);
+    $services = Service::select('id', 'name', 'price')->get(); // Hanya ambil yang dibutuhkan
+
+    return view("backend.service-detail.edit", [
+        "title" => "Edit Service Detail",
+        "services" => $services,
+        "service_detail" => $serviceDetail,
+    ]);
+}
+
 
     public function update(Request $request, $id)
     {
@@ -63,7 +67,6 @@ class ServiceDetailController extends Controller
         $serviceDetail->update([
             "name" => $request->name,
             "service_id" => $request->service_id,
-            "price" => $request->price,
         ]);
         return redirect_user("success", "Successfully Updated Service Detail", "admin.service-detail.index");
     }

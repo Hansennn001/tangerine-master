@@ -23,13 +23,10 @@
                             Name
                         </th>
                         <th scope="col" class="px-6 py-4 w-[250px]">
-                            Description
+                            Description (Hairstylist/Therapist)
                         </th>
                         <th scope="col" class="px-6 py-4">
                             Photo
-                        </th>
-                        <th scope="col" class="px-6 py-4">
-                            Social Media Link
                         </th>
                         <th scope="col" class="px-6 py-4">
                             Action
@@ -53,51 +50,18 @@
                                     class="size-20 object-cover rounded-md shadow-md">
                             </td>
                             <td class="px-6 py-4">
-                                <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                                    <li>
-                                        Facebook :
-                                        @if ($beautician->facebook_link)
-                                            <a href="{{ $beautician->facebook_link }}"
-                                                class="text-stone-700 hover:underline poppins-medium" target="_blank">
-                                                {{ $beautician->facebook_link }}
-                                            </a>
-                                        @else
-                                            -
-                                        @endif
-                                    </li>
-                                    <li>
-                                        Instagram :
-                                        @if ($beautician->instagram_link)
-                                            <a href="{{ $beautician->instagram_link }}"
-                                                class="text-stone-700 hover:underline poppins-medium" target="_blank">
-                                                {{ $beautician->instagram_link }}
-                                            </a>
-                                        @else
-                                            -
-                                        @endif
-                                    </li>
-                                    <li>
-                                        Twitter :
-                                        @if ($beautician->twitter_link)
-                                            <a href="{{ $beautician->twitter_link }}"
-                                                class="text-stone-700 hover:underline poppins-medium" target="_blank">
-                                                {{ $beautician->twitter_link }}
-                                            </a>
-                                        @else
-                                            -
-                                        @endif
-                                    </li>
-                                </ul>
-                            </td>
-                            <td class="px-6 py-4">
                                 <div class="flex items-center gap-5">
                                     <a href="{{ route('admin.beautician.edit', $beautician->id) }}"
                                         class="text-sm text-blue-700 poppins-medium hover:underline">
                                         <i class="fa-regular fa-pen-to-square"></i> Edit
                                     </a>
-                                    <a href="javascript:void(0)" data-beautician-id="{{ $beautician->id }}"
-                                        class="btn-delete text-sm text-red-700 poppins-medium hover:underline">
-                                        <i class="fa-regular fa-trash"></i> Delete
+                                    <form action="{{ route('admin.beautician.destroy', $beautician->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-sm text-red-700 poppins-medium hover:underline">
+                                            <i class="fa-regular fa-trash"></i> Delete
+                                        </button>
+                                    </form>
                                     </a>
                                 </div>
                             </td>
@@ -107,37 +71,4 @@
             </table>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script>
-        $(".btn-delete").click(deletebeautician);
-
-        function deleteBeautician() {
-            const beauticianID = $(this).data("beautician-id");
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: `{{ route('admin.beautician.destroy', ':id') }}`.replace(':id', beauticianID),
-                        type: 'DELETE',
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                        },
-                        success: function(data) {
-                            location.reload();
-                        },
-                    });
-                }
-            });
-        }
-    </script>
 @endsection
