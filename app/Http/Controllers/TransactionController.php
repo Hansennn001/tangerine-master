@@ -2,29 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Member;
-use App\Models\MemberPlan;
-use App\Models\Transaction;
-use Carbon\Carbon;
+use App\Models\Booking;
+use App\Models\Service;
+use App\Models\ScheduleService;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
     public function index()
     {
+        $transactions = Booking::select(
+            'bookings.id',
+            'bookings.customer_name',
+            'services.name as service_name',
+            'services.price as service_price',
+            'bookings.booking_date',
+            'schedule_services.session as session',
+            'bookings.queue_number',
+            'bookings.created_at',
+            'bookings.status',
+            'bookings.payment_proof',
+            'bookings.phone_number',
+        )
+            ->join('services', 'bookings.service_id', '=', 'services.id')
+            ->join('schedule_services', 'bookings.schedule_id', '=', 'schedule_services.id')
+            ->orderBy('bookings.created_at', 'desc')
+            ->get();
+
+
         return view("backend.transaction.index", [
             "title" => "Transaction",
-            "transactions" => Transaction::latest()->get(),
+            "transactions" => $transactions,
         ]);
-    }
-
-    public function create()
-    {
-        //
     }
 
     public function store(Request $request)
@@ -32,30 +45,63 @@ class TransactionController extends Controller
         DB::beginTransaction();
         try {
             $user_id = Auth::user()->id;
-            $dataCheckout = session("checkout_{$user_id}");
-            $newTransaction = Transaction::create([
-                "invoice" => "INV_TANGERINE_" . date("Ymdhis") . $user_id . "_" . strtoupper(Str::random(10)),
-                "user_id" => $dataCheckout["user_id"],
-                "room_id" => $request->room_id,
-                "beautician_id" => $request->beautician_id,
-                "plan" => $dataCheckout["course_label_taken"],
-                "day" => $request->day,
-                "time" => $request->time,
+
+            $newTransaction = Booking::create([
+                "customer_name" => $request->customer_name,
+                "service_id" => $request->service_id,
+                "schedule_id" => $request->schedule_id,
+                "booking_date" => $request->booking_date,
+                "queue_number" => $request->queue_number,
                 "payment_status" => "waiting",
-                "total" => $dataCheckout["total"],
-                "expirated_date" => now()->addDay(),
             ]);
+
             DB::commit();
-            return response()->json(["redirect_url" => route("payment.waiting", $newTransaction->invoice)]);
+            return response()->json(["redirect_url" => route("payment.waiting", $newTransaction->id)]);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(["redirect_url" => "", "message" => $e->getMessage()]);
         }
     }
 
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $transaction = Booking::findOrFail($id);
+            $transaction->update([
+                "status" => $request->status // Sekarang bisa 'confirmed' atau 'cancelled'
+            ]);
+    
+            DB::commit();
+            notificationFlash("success", "Successfully updated transaction status.");
+            return response()->json(["success" => true]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            notificationFlash("error", $e->getMessage());
+            return response()->json(["success" => false, "message" => $e->getMessage()]);
+        }
+    }
+    
+
+
+
     public function show($id)
     {
-        $transaction = Transaction::find($id);
+        $transaction = Booking::select(
+            'bookings.customer_name',
+            'services.name as service',
+            'services.price',
+            'bookings.booking_date',
+            'schedule_services.session',
+            'bookings.queue_number',
+            'bookings.created_at',
+            'bookings.payment_status'
+        )
+            ->join('services', 'bookings.service_id', '=', 'services.id')
+            ->join('schedule_services', 'bookings.schedule_id', '=', 'schedule_services.id')
+            ->where('bookings.id', $id)
+            ->first();
+
         return response()->json([
             "html" => view("components.modal-detail-transaction", [
                 "transaction" => $transaction,
@@ -63,73 +109,34 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
+    public function destroy($id)
     {
         DB::beginTransaction();
         try {
-            $user_id = Auth::user()->id;
-            $transaction = Transaction::find($id);
-            $transaction->update([
-                "payment_status" => "confirmed"
-            ]);
-            $newMember = Member::create([
-                "user_id" => $transaction->user_id,
-            ]);
+            $transaction = Booking::findOrFail($id);
+            $transaction->delete();
 
-            $type = trim(explode(" - ", $transaction->plan)[2]);
-            $subscribed_date = Carbon::parse(now());
-            if ($type == "10 Session") {
-                $expired_date = $subscribed_date->copy()->addMonths(4);
-            } else if ($type == "20 Session") {
-                $expired_date = $subscribed_date->copy()->addMonths(6);
-            } else {
-                $expired_date = $subscribed_date->copy()->addDay();
-            }
-
-            MemberPlan::create([
-                "member_id" => $newMember->id,
-                "beautician_id" => $transaction->beautician_id,
-                "room_id" => $transaction->room_id,
-                "plan" => $transaction->plan,
-                "day" => $transaction->day,
-                "time" => $transaction->time,
-                "subscribed_date" => $subscribed_date,
-                "expired_date" => $expired_date,
-                "status" => "active",
-            ]);
             DB::commit();
-            notificationFlash("success", "Successfully Confirm Payment");
+            notificationFlash("success", "Transaction successfully deleted");
             return response()->json(["success" => true]);
         } catch (\Exception $e) {
             DB::rollBack();
-            notificationFlash("error", $e->getMessage());
+            notificationFlash("error", "Failed to delete transaction: " . $e->getMessage());
             return response()->json(["success" => false]);
         }
     }
 
-    public function destroy($id)
-    {
-        //
-    }
-
-
     public function upload_proof(Request $request)
     {
-        $user_id = Auth::user()->id;
-        $transaction = Transaction::find($request->transaction_id);
+        $transaction = Booking::findOrFail($request->transaction_id);
         if ($request->hasFile("proof_of_payment")) {
             $file = $request->file("proof_of_payment");
-            $fileName = "PROOF_IMAGE_" . date("Ymdhis") . $user_id . "." . $file->extension();
+            $fileName = "PROOF_IMAGE_" . date("Ymdhis") . "_" . Str::random(10) . "." . $file->extension();
             $file->move(public_path("uploads/proofs"), $fileName);
 
             $transaction->update([
                 "proof_of_payment" => $fileName,
-                "payment_status" => "paid"
+                "payment_status" => "paid",
             ]);
 
             notificationFlash("success", "Successfully Upload Proof");

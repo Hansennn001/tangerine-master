@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TransactionController;
@@ -14,6 +15,8 @@ Route::prefix("services")->group(function () {
     Route::get('/{slug}', [FrontendController::class, "service_detail"])->name("service.detail");});
 Route::get('/product', [FrontendController::class, "product"])->name("product");
 Route::get('/checkout', [FrontendController::class, "checkout"])->name("checkout");
+Route::put('/admin/transaction/{id}/update', [TransactionController::class, 'update'])
+    ->name('admin.transaction.update');
 
 
 Route::middleware(["auth"])->group(function () {
@@ -24,6 +27,8 @@ Route::middleware(["auth"])->group(function () {
     Route::post("/membership/checkout", [TransactionController::class, "store"])->name("member.checkout.post");
     Route::get("/payment/waiting/{invoice}", [FrontendController::class, "payment_waiting"])->name("payment.waiting");
     Route::post("/upload/proof", [TransactionController::class, "upload_proof"])->name("payment.upload.proof");
+
+    Route::post("/service/booking", [BookingController::class, "storeBooking"])->name("service.booking");
 
     include_once __DIR__ . "/admin.php";
     Route::get("/logout", [AuthController::class, "logout"])->name("logout");

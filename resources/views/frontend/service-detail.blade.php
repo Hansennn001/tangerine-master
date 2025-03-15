@@ -13,24 +13,24 @@
 
     <div class="mt-16 lg:mt-20">
         <h1 class="text-3xl text-center text-stone-700 poppins-bold">Booking</h1>
-        <form method="POST" id="form-membership" action="" class="mt-10 w-full lg:w-1/2 mx-auto space-y-5 pb-20" enctype="multipart/form-data">
+        <form method="POST" id="form-booking" action="" class="mt-10 w-full lg:w-1/2 mx-auto space-y-5 pb-20"
+            enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="service_id" value="{{ $service->id }}">
-            <div class="">
-                <select id="plan" name="plan"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-stone-500 focus:border-stone-500 block w-full p-2.5">
-                    <option value="" selected>-- Choose --</option>
-                    <option value="{{ $service->id }}">
-                        {{ $service->name }} • {{ format_rupiah($service->price) }}
-                    </option>
-                </select>
+            <label for="service" class="block mb-2 text-sm font-medium text-gray-900">
+                Service
+            </label>
+            <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 w-full">
+                <p class="text-gray-900">
+                    <strong>{{ $service->name }}</strong> • {{ format_rupiah($service->price) }}
+                </p>
             </div>
 
             <div>
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900">
                     Name
                 </label>
-                <input type="text" id="name" name="name"
+                <input required type="text" id="name" name="name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-stone-500 focus:border-stone-500 block w-full p-2.5"
                     placeholder="Enter your name" required>
             </div>
@@ -44,53 +44,28 @@
                     placeholder="Enter your WhatsApp number" required>
             </div>
 
+            <div id="schedule-container" class="mt-5 flex flex-col items-center gap-2 justify-center">
+                <h2 class="text-lg font-medium text-gray-900">Select Date & Session</h2>
+                <input type="date" name="date" id="selected-date" class="border p-2 rounded"
+                    onchange="updateAvailableSessions()">
+                <input type="hidden" id="selected-session" name="session">
 
-            <div class="mt-16 lg:mt-20">
-                <div class="mt-10">
-                    <div class="grid grid-cols-2 gap-5 mt-10">
-                        <div class="">
-                            <label for="date"
-                                class="text-center block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Select Date
-                            </label>
-                            <input type="date" id="date" name="date"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-stone-500 focus:border-stone-500 block w-full p-2.5">
-                        </div>
-
-                        <div class="">
-                            <label for="time"
-                                class="text-center block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Time
-                            </label>
-                            <select id="time" name="time"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-stone-500 focus:border-stone-500 block w-full p-2.5">
-                                <option value="">-- Select --</option>
-                                <option value="06.00">06.00 </option>
-                                <option value="07.00">07.00 </option>
-                                <option value="08.00">08.00 </option>
-                                <option value="09.00">09.00 </option>
-                                <option value="10.00">10.00 </option>
-                                <option value="11.00">11.00 </option>
-                                <option value="12.00">12.00 </option>
-                                <option value="13.00">13.00 </option>
-                                <option value="14.00">14.00 </option>
-                                <option value="15.00">15.00 </option>
-                                <option value="16.00">16.00 </option>
-                                <option value="17.00">17.00 </option>
-                                <option value="18.00">18.00 </option>
-                                <option value="19.00">19.00 </option>
-                            </select>
-                        </div>
-                    </div>
+                <div id="session-options" class="mt-3 flex gap-3">
+                    @foreach (['morning', 'afternoon', 'evening'] as $session)
+                        <button type="button" data-session="{{ $session }}"
+                            class="session-btn px-4 py-2 border rounded bg-gray-400 text-white cursor-not-allowed" disabled>
+                            {{ ucfirst($session) }}
+                        </button>
+                    @endforeach
                 </div>
-
+            </div>
+            {{-- 
+            <div class="mt-16 lg:mt-20">
                 <div class="mt-10">
                     <h1 class="text-center text-xl text-stone-500 poppins-semibold">Choose your payment method</h1>
                     <div class="grid grid-cols-2 gap-10 mt-5">
                         <!-- Bank BCA -->
                         <div>
-                            <input type="radio" id="payment-method-1" name="payment_method" value="bank_transfer"
-                                class="hidden peer" />
                             <label for="payment-method-1"
                                 class="flex items-center w-full text-gray-500 bg-white border border-gray-200 rounded-lg overflow-hidden cursor-pointer peer-checked:border-2 peer-checked:border-stone-600 peer-checked:text-stone-600 hover:text-gray-600 hover:bg-gray-100 p-3">
                                 <img src="/imgs/BCA.png" alt="BCA Logo" class="w-16 h-5 mr-5">
@@ -99,7 +74,7 @@
                                     <p class="text-sm">a.n PT Advipa Grha Dwidaya</p>
                                     <div class="flex items-center mt-1">
                                         <span id="bca-account" class="text-sm">537 530 6040</span>
-                                        <button type="button" onclick="copyToClipboard('bca-account')" 
+                                        <button type="button" onclick="copyToClipboard('bca-account')"
                                             class="ml-2 text-stone-600 hover:text-stone-800">
                                             <i class="fa-regular fa-copy"></i>
                                         </button>
@@ -110,8 +85,6 @@
 
                         <!-- Bank Woori Saudara (BWS) -->
                         <div>
-                            <input type="radio" id="payment-method-2" name="payment_method" value="credit_card"
-                                class="hidden peer" />
                             <label for="payment-method-2"
                                 class="flex items-center w-full text-gray-500 bg-white border border-gray-200 rounded-lg overflow-hidden cursor-pointer peer-checked:border-2 peer-checked:border-stone-600 peer-checked:text-stone-600 hover:text-gray-600 hover:bg-gray-100 p-3">
                                 <img src="/imgs/bwslogo.png" alt="BWS Logo" class="w-16 h-7 mr-5">
@@ -129,35 +102,117 @@
                             </label>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                <!-- Payment Proof Upload -->
-                <div class="mt-8">
-                    <label class="block mb-2 text-sm font-medium text-gray-900" for="payment_proof">
+            <!-- Payment Proof Upload -->
+            <div class="mt-8">
+                {{-- <label class="block mb-2 text-sm font-medium text-gray-900" for="payment_proof">
                         Upload Payment Proof
                     </label>
                     <input type="file" id="payment_proof" name="payment_proof" accept="image/*"
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-                        required>
-                    <p class="mt-1 text-sm text-gray-500">
-                        Pembayaran hanya di konfirmasi di jam kerja (Senin-Jumat, 08.00-17.00 WIB)
-                    </p>
-                </div>
-
-                <div class="mt-10">
-                    <button type="submit"
-                        class="w-full text-white bg-stone-700 hover:bg-stone-800 focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-sm px-5 py-3">
-                        <i class="fa-solid fa-credit-card mr-1.5"></i>
-                        Submit Booking
-                    </button>
-                </div>
+                        required> --}}
+                <p class="mt-1 text-sm text-red-600">
+                    - Admin akan mengonfirmasi jadwal jam perawatan berdasarkan nomor antrian
+                </p>
+                <p class="mt-1 text-sm text-red-600">
+                    - Pembayaran hanya di konfirmasi di jam kerja (Senin-Jumat, 08.00-17.00 WIB)
+                </p>
+                <p class="mt-1 text-sm text-red-600">
+                    - Pembayaran harus di konfirmasi dalam waktu 2 jam setelah booking
+                </p>
             </div>
-        </form>
+
+            <div class="mt-10">
+                <button type="submit"
+                    class="w-full text-white bg-stone-700 hover:bg-stone-800 focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-sm px-5 py-3">
+                    <i class="fa-solid fa-credit-card mr-1.5"></i>
+                    Submit Booking
+                </button>
+            </div>
+    </div>
+    </form>
     </div>
 @endsection
 
 @section('script')
     <script>
+        const availableSessions = @json($availableSessions);
+
+        function updateAvailableSessions() {
+            const selectedDate = document.getElementById('selected-date').value;
+            const buttons = document.querySelectorAll('.session-btn');
+            const hiddenSessionInput = document.getElementById('selected-session'); // Input hidden
+
+            hiddenSessionInput.value = ""; // Reset value saat tanggal berubah
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-stone-700', 'cursor-pointer');
+                btn.classList.add('bg-gray-400', 'cursor-not-allowed');
+                btn.onclick = null; // Hapus event listener lama
+            });
+
+            if (availableSessions[selectedDate]) {
+                availableSessions[selectedDate].forEach(sessionId => {
+                    const sessionName = ["morning", "afternoon", "evening"][sessionId - 1];
+                    const btn = document.querySelector(`[data-session="${sessionName}"]`);
+                    if (btn) {
+                        btn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        btn.classList.add('bg-stone-700', 'cursor-pointer');
+
+                        // Tambahkan event listener baru
+                        btn.onclick = function() {
+                            hiddenSessionInput.value = sessionName; // Simpan sesi yang dipilih
+                            buttons.forEach(b => b.classList.remove('border-2', 'border-stone-900'));
+                            btn.classList.add('border-2', 'border-stone-900');
+                        };
+                    }
+                });
+            }
+        }
+
+        // warnain hover
+        function updateAvailableSessions() {
+            let dateInput = document.getElementById("selected-date");
+            let sessionButtons = document.querySelectorAll(".session-btn");
+
+            // Aktifkan tombol jika tanggal dipilih
+            if (dateInput.value) {
+                sessionButtons.forEach(button => {
+                    button.classList.remove("cursor-not-allowed", "bg-gray-400");
+                    button.classList.add("bg-blue-500", "hover:bg-blue-600", "cursor-pointer");
+                    button.disabled = false;
+                });
+            } else {
+                sessionButtons.forEach(button => {
+                    button.classList.add("cursor-not-allowed", "bg-gray-400");
+                    button.classList.remove("bg-blue-500", "hover:bg-blue-600", "bg-green-500");
+                    button.disabled = true;
+                });
+            }
+        }
+
+        document.querySelectorAll(".session-btn").forEach(button => {
+            button.addEventListener("click", function() {
+                if (!this.disabled) {
+                    // Hapus warna dari semua tombol sesi
+                    document.querySelectorAll(".session-btn").forEach(btn => {
+                        btn.classList.remove("bg-green-500", "hover:bg-green-600");
+                        btn.classList.add("bg-blue-500", "hover:bg-blue-600");
+                    });
+
+                    // Tambahkan warna hijau ke tombol yang dipilih
+                    this.classList.remove("bg-blue-500", "hover:bg-blue-600");
+                    this.classList.add("bg-green-500", "hover:bg-green-600");
+
+                    // Simpan sesi yang dipilih ke dalam input hidden
+                    document.getElementById("selected-session").value = this.getAttribute("data-session");
+                }
+            });
+        });
+
+
+
         function copyToClipboard(elementId) {
             const text = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(text.replace(/\s/g, '')).then(() => {
@@ -175,16 +230,15 @@
         }
 
         $(document).ready(function() {
-            $("#form-membership").submit(function(e) {
+            $("#form-booking").submit(function(e) {
                 e.preventDefault();
 
                 const name = $("input[name='name']").val().trim();
                 const whatsapp = $("input[name='whatsapp']").val().trim();
-                const plan = $("select[name='plan']").val();
+                const plan = $("input[name='service_id']").val();
                 const date = $("input[name='date']").val();
-                const time = $("select[name='time']").val();
-                const paymentMethod = $("input[name='payment_method']:checked").val();
                 const paymentProof = $("#payment_proof")[0].files[0];
+                const session = $("input[name='session']").val();
 
                 if (!name) {
                     Swal.fire({
@@ -200,6 +254,15 @@
                         icon: "error",
                         title: 'WhatsApp Number Required',
                         text: 'Please enter your WhatsApp number'
+                    });
+                    return;
+                }
+
+                if (!date) {
+                    Swal.fire({
+                        icon: "error",
+                        title: 'Date Required',
+                        text: 'Please select a date'
                     });
                     return;
                 }
@@ -222,33 +285,6 @@
                     return;
                 }
 
-                if (!date) {
-                    Swal.fire({
-                        icon: "error",
-                        title: 'Date Required',
-                        text: 'You must select a date first'
-                    });
-                    return;
-                }
-
-                if (!time) {
-                    Swal.fire({
-                        icon: "error",
-                        title: 'Time Required',
-                        text: 'You must select a time first'
-                    });
-                    return;
-                }
-
-                if (!paymentMethod) {
-                    Swal.fire({
-                        icon: "error",
-                        title: 'Payment Method Required',
-                        text: 'You must choose a payment method first'
-                    });
-                    return;
-                }
-
                 if (!paymentProof) {
                     Swal.fire({
                         icon: "error",
@@ -259,6 +295,8 @@
                 }
 
                 const formData = new FormData(this);
+                formData.append("session", session);
+                formData.append("date", new Date(date).toISOString().split("T")[0]);
                 const isLogin = @json(Auth::check());
 
                 if (!isLogin) {
@@ -279,7 +317,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "/membership",
+                    url: "/service/booking",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -293,9 +331,34 @@
                         });
                     },
                     success: function(response) {
-                        location.href = response.redirect_url;
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Booking Success',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.href = response.redirect_url;
+                            }
+                        });
+                    },
+
+                    error: function(xhr) {
+                        let errorMessage = "Something went wrong!";
+
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        }
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Booking Failed",
+                            text: errorMessage,
+                        });
                     }
                 });
+
+
             });
         });
     </script>

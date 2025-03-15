@@ -6,20 +6,22 @@ use App\Models\Service;
 use App\Models\ServiceDetail;
 use App\Models\Room;
 use App\Models\Beautician;
+use App\Models\Booking;
 use App\Models\Transaction;
 use App\Models\Product;
+use App\Models\ScheduleService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
     public function home()
-{
-    return view('frontend.welcome', [
-        "title" => "Home",
-        "services" => Service::all(),
-    ]);
-}
+    {
+        return view('frontend.welcome', [
+            "title" => "Home",
+            "services" => Service::all(),
+        ]);
+    }
 
 
     public function about()
@@ -38,24 +40,55 @@ class FrontendController extends Controller
     }
 
     public function services()
-{
-    return view('frontend.services', [ 
-        "title" => "Services",
-        "services" => Service::all(), 
-    ]);
-}
+    {
+        return view('frontend.services', [
+            "title" => "Services",
+            "services" => Service::all(),
+        ]);
+    }
 
 
-public function service_detail($slug)
-{
-    $service = Service::firstWhere("slug", $slug);
-    return view('frontend.service-detail', [ 
-        "title" => "Services",
-        "service" => $service, 
-        "Beauticians" => Service::all(),
-    ]);
-}
+    public function service_detail($slug)
+    {
+        $service = Service::firstWhere("slug", $slug);
+        $years = generateDate()["years"];
+        $calendarData = generateDate()["calendarData"];
+        $allDates = generateDate()["allDates"]; // Ambil daftar tanggal yang benar
 
+        // Ambil semua sesi yang tersedia
+        $allSchedules = ScheduleService::pluck('id')->toArray(); // [1, 2, 3]
+
+        // Ambil daftar booking yang sudah ada
+        $bookedSessions = Booking::select('booking_date', 'schedule_id')
+            ->groupBy('booking_date', 'schedule_id')
+            ->havingRaw('COUNT(id) >= 3') // Sesi yang sudah penuh
+            ->get()
+            ->groupBy('booking_date')
+            ->map(function ($items) {
+                return $items->pluck('schedule_id')->toArray();
+            });
+
+        // Format data availableSessions
+        $availableSessions = [];
+        foreach ($allDates as $date) {
+            // Jika tidak ada booking pada tanggal tersebut, semua sesi tersedia
+            if (!isset($bookedSessions[$date])) {
+                $availableSessions[$date] = $allSchedules;
+            } else {
+                // Ambil sesi yang belum penuh
+                $availableSessions[$date] = array_diff($allSchedules, $bookedSessions[$date]);
+            }
+        }
+
+        return view('frontend.service-detail', [
+            "title" => "Services",
+            "service" => $service,
+            "Beauticians" => Service::all(),
+            "years" => $years,
+            "calendarData" => $calendarData,
+            "availableSessions" => $availableSessions,
+        ]);
+    }
 
     public function checkout()
     {

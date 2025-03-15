@@ -3,6 +3,7 @@
 use App\Models\Service;
 use App\Models\ServiceDetail;
 use App\Models\Menu;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -86,5 +87,44 @@ if (!function_exists("getPlanLabel")) {
         $service = Service::find($service_id);
         $service_detail = ServiceDetail::find($service_detail_id);
         return $service->name . " - " . $service_detail->name;
+    }
+}
+
+if (!function_exists("generateDate")) {
+    function generateDate()
+    {
+        $currentYear = date('Y');
+        $currentMonth = date('n');
+        $years = [$currentYear, $currentYear + 1];
+
+        $calendarData = [];
+        $allDates = []; // Tambahkan array untuk menyimpan daftar tanggal
+
+        foreach ($years as $year) {
+            $startMonth = ($year == $currentYear) ? $currentMonth : 1;
+
+            for ($month = $startMonth; $month <= 12; $month++) {
+                $carbonDate = Carbon::createFromDate($year, $month, 1);
+                $monthName = $carbonDate->translatedFormat('F');
+                $daysInMonth = $carbonDate->daysInMonth;
+                $firstDayOfWeek = $carbonDate->dayOfWeek;
+
+                $calendarData[$year][$monthName] = [
+                    'days' => range(1, $daysInMonth),
+                    'startDay' => $firstDayOfWeek
+                ];
+
+                for ($day = 1; $day <= $daysInMonth; $day++) {
+                    $dateString = Carbon::createFromDate($year, $month, $day)->format('Y-m-d');
+                    $allDates[] = $dateString;
+                }
+            }
+        }
+
+        return [
+            "years" => $years,
+            "calendarData" => $calendarData,
+            "allDates" => $allDates, 
+        ];
     }
 }
